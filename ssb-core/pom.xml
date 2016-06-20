@@ -14,6 +14,10 @@
             <artifactId>ssb-entidades</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
