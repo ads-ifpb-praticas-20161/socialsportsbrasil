@@ -18,7 +18,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 /**
@@ -45,7 +45,7 @@ public class Usuario implements Serializable{
     @Basic(fetch = FetchType.LAZY)
     private byte[] foto;
     
-    @OneToMany
+    @ManyToMany
     private List<Usuario> amigos;
 
     public Usuario() {
