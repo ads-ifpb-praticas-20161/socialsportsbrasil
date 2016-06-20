@@ -7,7 +7,9 @@ package dijalmasilva.ssb.web.controladores;
 
 import dijalmasilva.ssb.core.services.ServiceUser;
 import dijalmasilva.ssb.entidades.Usuario;
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,5 +46,11 @@ public class ControladorUser {
             return "erroNewUser";
         
         return "login";
+    }
+    
+    @RequestMapping("/cancel")
+    public void cancelUser(Long id, HttpServletResponse res) throws IOException{
+        serviceUser.desativarConta(id);
+        res.sendRedirect("/home");
     }
 }
