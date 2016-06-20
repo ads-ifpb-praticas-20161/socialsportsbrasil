@@ -20,12 +20,22 @@ public class ServiceUser {
     @Inject
     private UsuarioDao dao;
     
-    public Usuario loginEmail(String email){
-        return dao.findByEmail(email);
+    public Usuario loginEmail(String email, String password){
+        Usuario user = dao.findByEmail(email);
+        if (user.getSenha().equals(password))
+            return user;
+        else {
+            return null;
+        }
     }
     
-    public Usuario loginUsername(String username){
-        return dao.findByUsername(username);
+    public Usuario loginUsername(String username, String password){
+        Usuario user = dao.findByUsername(username);
+        if (user.getSenha().equals(password))
+            return user;
+        else {
+            return null;
+        }
     }
     
     public Usuario salvarUsuario(Usuario u){
