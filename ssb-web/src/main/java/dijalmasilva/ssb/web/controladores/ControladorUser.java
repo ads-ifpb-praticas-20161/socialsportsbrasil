@@ -63,4 +63,8 @@ public class ControladorUser {
         
         return "";
     }
+    
+    public String adicionarAmigo(){
+        return "novoAmigo";
+    }
 }
