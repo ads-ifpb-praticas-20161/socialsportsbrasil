@@ -33,7 +33,16 @@ public class ControladorUser {
                 return "erroLogin";
             }
         }
-        
+        req.getSession().setAttribute("user", user);
         return "home";
+    }
+    
+    @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
+    public String newUser(Usuario usuario){
+        Usuario user = serviceUser.salvarUsuario(usuario);
+        if (user == null)
+            return "erroNewUser";
+        
+        return "login";
     }
 }
