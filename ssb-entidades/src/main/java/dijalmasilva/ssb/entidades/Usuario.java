@@ -10,11 +10,14 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -38,6 +41,9 @@ public class Usuario implements Serializable{
     private int idade;
     @Enumerated(EnumType.STRING)
     private Status conta;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] foto;
     
     @OneToMany
     private List<Usuario> amigos;
@@ -45,11 +51,11 @@ public class Usuario implements Serializable{
     public Usuario() {
     }
 
-    public Usuario(String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, Status conta) {
-        this(nome, sobrenome, username, email, senha, dataNascimento, idade, new ArrayList<>(), conta);
+    public Usuario(String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, Status conta, byte[] foto) {
+        this(nome, sobrenome, username, email, senha, dataNascimento, idade, new ArrayList<>(), conta, foto);
     }
 
-    public Usuario(String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, List<Usuario> amigos, Status conta) {
+    public Usuario(String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, List<Usuario> amigos, Status conta, byte[] foto) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.username = username;
@@ -59,13 +65,14 @@ public class Usuario implements Serializable{
         this.idade = idade;
         this.amigos = amigos;
         this.conta = conta;
+        this.foto = foto;
     }
 
-    public Usuario(Long id, String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, Status conta) {
-        this(id, nome, sobrenome, username, email, senha, dataNascimento, idade, new ArrayList<>(), conta);
+    public Usuario(Long id, String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, Status conta, byte[] foto) {
+        this(id, nome, sobrenome, username, email, senha, dataNascimento, idade, new ArrayList<>(), conta, foto);
     }
 
-    public Usuario(Long id, String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, List<Usuario> amigos, Status conta) {
+    public Usuario(Long id, String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, List<Usuario> amigos, Status conta, byte[] foto) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -76,6 +83,7 @@ public class Usuario implements Serializable{
         this.idade = idade;
         this.amigos = amigos;
         this.conta = conta;
+        this.foto = foto;
     }
 
     public long getId() {
@@ -164,5 +172,13 @@ public class Usuario implements Serializable{
 
     public void setConta(Status conta) {
         this.conta = conta;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 }
