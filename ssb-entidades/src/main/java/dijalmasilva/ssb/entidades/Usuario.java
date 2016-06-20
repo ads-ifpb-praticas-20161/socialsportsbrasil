@@ -5,11 +5,14 @@
  */
 package dijalmasilva.ssb.entidades;
 
+import dijalmasilva.ssb.enums.Status;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,7 +27,7 @@ public class Usuario implements Serializable{
     
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String nome;
     private String sobrenome;
     private String username;
@@ -33,6 +36,8 @@ public class Usuario implements Serializable{
     private LocalDate dataNascimento;
     @Transient
     private int idade;
+    @Enumerated(EnumType.STRING)
+    private Status conta;
     
     @OneToMany
     private List<Usuario> amigos;
@@ -40,11 +45,11 @@ public class Usuario implements Serializable{
     public Usuario() {
     }
 
-    public Usuario(String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade) {
-        this(nome, sobrenome, username, email, senha, dataNascimento, idade, new ArrayList<>());
+    public Usuario(String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, Status conta) {
+        this(nome, sobrenome, username, email, senha, dataNascimento, idade, new ArrayList<>(), conta);
     }
 
-    public Usuario(String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, List<Usuario> amigos) {
+    public Usuario(String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, List<Usuario> amigos, Status conta) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.username = username;
@@ -53,13 +58,14 @@ public class Usuario implements Serializable{
         this.dataNascimento = dataNascimento;
         this.idade = idade;
         this.amigos = amigos;
+        this.conta = conta;
     }
 
-    public Usuario(long id, String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade) {
-        this(id, nome, sobrenome, username, email, senha, dataNascimento, idade, new ArrayList<>());
+    public Usuario(Long id, String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, Status conta) {
+        this(id, nome, sobrenome, username, email, senha, dataNascimento, idade, new ArrayList<>(), conta);
     }
 
-    public Usuario(long id, String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, List<Usuario> amigos) {
+    public Usuario(Long id, String nome, String sobrenome, String username, String email, String senha, LocalDate dataNascimento, int idade, List<Usuario> amigos, Status conta) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -69,13 +75,14 @@ public class Usuario implements Serializable{
         this.dataNascimento = dataNascimento;
         this.idade = idade;
         this.amigos = amigos;
+        this.conta = conta;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -149,5 +156,13 @@ public class Usuario implements Serializable{
     
     public void removeAmigo(Usuario u){
         this.amigos.remove(u);
+    }
+
+    public Status getConta() {
+        return conta;
+    }
+
+    public void setConta(Status conta) {
+        this.conta = conta;
     }
 }
