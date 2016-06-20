@@ -8,8 +8,10 @@ package dijalmasilva.ssb.web.controladores;
 import dijalmasilva.ssb.core.services.ServiceUser;
 import dijalmasilva.ssb.entidades.Usuario;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,6 +66,7 @@ public class ControladorUser {
         return "";
     }
     
+    @RequestMapping(value = {"/addFriend"}, method = RequestMethod.POST)
     public String adicionarAmigo(Long id, Long amigo, HttpServletRequest req){
         Usuario user = serviceUser.adicionarAmigo(id, amigo);
         if (user == null)
@@ -71,4 +74,38 @@ public class ControladorUser {
         
         return "novoAmigo";
     }
+    
+    @RequestMapping(value = {"/removeFriend"}, method = RequestMethod.POST)
+    public String removerAmigo(Long id, Long amigo, HttpServletRequest req){
+        Usuario user = serviceUser.removerAmigo(id, amigo);
+        if (user == null)
+            return "erro/removerAmigo";
+        
+        return "removerAmigo";
+    }
+    
+    @RequestMapping(value = {"/search={email}"}, method = RequestMethod.GET)
+    public String buscarPorEmail(@Param("email") String email, HttpServletRequest req){
+        List<Usuario> usuarios = serviceUser.buscarUsuariosPorEmail(email);
+        req.setAttribute("usuariosEncontrados", usuarios);
+        
+        return "busca";
+    }
+    
+    @RequestMapping(value = {"/search={username}"}, method = RequestMethod.GET)
+    public String buscarPorUsername (@Param("username") String username, HttpServletRequest req){
+        List<Usuario> usuarios = serviceUser.buscarUsuariosPorUsername(username);
+        req.setAttribute("usuariosEncontrados", usuarios);
+        
+        return "busca";
+    }
+    
+    @RequestMapping("/otherUsers")
+    public String listarUsuarios(HttpServletRequest req){
+        List<Usuario> usuarios = serviceUser.listarTodos();
+        req.setAttribute("todosusuarios", req);
+        
+        return "listartodos";
+    }
+    
 }
