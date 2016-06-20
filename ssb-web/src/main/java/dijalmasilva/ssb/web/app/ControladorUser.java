@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dijalmasilva.ssb.web.controladores;
+package dijalmasilva.ssb.web.app;
 
 import dijalmasilva.ssb.core.services.ServiceUser;
 import dijalmasilva.ssb.entidades.Usuario;
