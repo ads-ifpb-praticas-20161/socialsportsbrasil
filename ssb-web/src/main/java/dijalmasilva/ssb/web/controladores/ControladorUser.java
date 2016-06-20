@@ -32,7 +32,7 @@ public class ControladorUser {
             user = serviceUser.loginUsername(login, senha);
             
             if (user == null){
-                return "erroLogin";
+                return "erro/login";
             }
         }
         req.getSession().setAttribute("user", user);
@@ -43,7 +43,7 @@ public class ControladorUser {
     public String newUser(Usuario usuario){
         Usuario user = serviceUser.salvarUsuario(usuario);
         if (user == null)
-            return "erroNewUser";
+            return "erro/novoUsuario";
         
         return "login";
     }
@@ -52,5 +52,15 @@ public class ControladorUser {
     public void cancelUser(Long id, HttpServletResponse res) throws IOException{
         serviceUser.desativarConta(id);
         res.sendRedirect("/home");
+    }
+    
+    @RequestMapping(value = {"/update"})
+    public String atualizarPerfil(Usuario u, HttpServletRequest req) {
+        Usuario user = serviceUser.atualizarPerfil(u);
+        
+        if (user == null)
+            return "erro/atualizarPerfil";
+        
+        return "";
     }
 }
