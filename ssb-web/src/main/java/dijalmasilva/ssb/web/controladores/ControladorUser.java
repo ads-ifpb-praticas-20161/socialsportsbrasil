@@ -64,8 +64,11 @@ public class ControladorUser {
         return "";
     }
     
-    public String adicionarAmigo(){
-        return "novoAmigo";
+    public String adicionarAmigo(Long id, Long amigo, HttpServletRequest req){
+        Usuario user = serviceUser.adicionarAmigo(id, amigo);
+        if (user == null)
+            return "erro/amigoNovo";
         
+        return "novoAmigo";
     }
 }
