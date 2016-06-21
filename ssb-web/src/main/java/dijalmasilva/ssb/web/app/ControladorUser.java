@@ -31,6 +31,11 @@ public class ControladorUser {
     public String home(){
         return "home";
     }
+    
+    @RequestMapping("/otherUser")
+    public String otherUser(HttpServletRequest req){
+        return "otherUser";
+    }
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
     public String login(String login, String senha, HttpServletRequest req) {
@@ -113,7 +118,7 @@ public class ControladorUser {
     @RequestMapping("/otherUsers")
     public String listarUsuarios(HttpServletRequest req) {
         List<Usuario> usuarios = serviceUser.listarTodos();
-        req.setAttribute("todosusuarios", req);
+        req.setAttribute("todosusuarios", usuarios);
 
         return "listartodos";
     }
