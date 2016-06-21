@@ -6,10 +6,10 @@
 package dijalmasilva.ssb.web.app;
 
 import dijalmasilva.ssb.core.services.ServiceUser;
+import dijalmasilva.ssb.core.services.ServiceUserImpl;
 import dijalmasilva.ssb.entidades.Usuario;
 import java.io.IOException;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletOutputStream;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/user")
 public class ControladorUser {
 
-    private final ServiceUser serviceUser = new ServiceUser();
+    private ServiceUser serviceUser = new ServiceUserImpl();
     
     @RequestMapping("/home")
     public String home(){
