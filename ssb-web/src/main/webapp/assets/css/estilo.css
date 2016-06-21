@@ -64,3 +64,23 @@ header {
     position: relative;
     top: -30px;
 }
+
+#notification {
+    position: fixed;
+    width: 100%;
+    bottom: 40px;
+}
+
+.modal-notification {
+    background: #F3F3F3;
+    margin: 0 auto;
+    width: 400px;
+    padding: 8px;
+    box-shadow: 0px 0px 6px -1px #000;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.invisible {
+    display: none;
+}

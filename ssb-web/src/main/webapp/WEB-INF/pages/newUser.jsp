@@ -4,6 +4,7 @@
     Author     : dijalma
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,9 +12,9 @@
     <body class="text-center">
         <h1>Novo usuário</h1>
         <br><br>
-        <form class="form-group-sm">
+        <form class="form-group-sm" action="/user/new" method="POST">
             <div class="form-control-sm">
-                
+
                 <div class="form-horizontal">
                     <label>Nome:</label>
                     <input type="text" class="form-control" name="nome" required=""/>
@@ -47,5 +48,8 @@
                 <input type="submit" class="btn btn-primary btn-lg" value="Cadastrar-se" />
             </div><br><br>
         </form>
-    </body>
+    <c:if test="${result != null}" >
+        <%@include file="notification.jsp" %>
+    </c:if>
+</body>
 </html>

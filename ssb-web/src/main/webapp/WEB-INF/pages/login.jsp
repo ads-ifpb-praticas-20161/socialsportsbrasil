@@ -4,6 +4,7 @@
     Author     : dijalma
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,6 +27,8 @@
                 <input type="submit" class="btn btn-primary btn-lg" value="Entrar" />
             </div><br><br>
         </form>
-        
+    <c:if test="${result != null}" >
+        <%@include file="notification.jsp" %>
+    </c:if>
     </body>
 </html>

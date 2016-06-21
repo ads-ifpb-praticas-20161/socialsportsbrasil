@@ -53,12 +53,16 @@ public class ControladorUser {
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
-    public String newUser(Usuario usuario) {
+    public String newUser(Usuario usuario, HttpServletRequest req) {
         Usuario user = serviceUser.salvarUsuario(usuario);
         if (user == null) {
-            return "erro/novoUsuario";
+            req.setAttribute("result", "Não foi possível criar a conta, verifique se todos os campos foram"
+                    + " preenchidos corretamente!");
+        }else{
+            req.setAttribute("result", "Usuário cadastrado com sucesso."
+                    + "\n Faça login e aproveite!");
         }
-
+        
         return "login";
     }
 

@@ -4,6 +4,7 @@
     Author     : dijalma
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,5 +22,8 @@
                 <input class="btn btn-lg btn-success" value="Solicitar Amizade" type="submit" />
             </div>
         </aside>
+    <c:if test="${result != null}" >
+        <%@include file="notification.jsp" %>
+    </c:if>
     </body>
 </html>
