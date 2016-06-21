@@ -5,24 +5,23 @@
  */
 package dijalmasilva.ssb.web.app;
 
-import java.io.IOException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author dijalma
+ * @author Dijalma Silva <dijalmacz@gmail.com>
  */
 @Controller
-public class ControladorHome {
-    
-    @RequestMapping("/")
-    public String index() throws IOException{
-        return "/home";
+public class ControllerHome {
+
+    @RequestMapping("/home")
+    public String home() {
+        return "index";
     }
     
-    @RequestMapping("/home")
-    public String home(){
-        return "index";
+    @RequestMapping("/newUser")
+    public String newUser(){
+        return "newUser";
     }
 }

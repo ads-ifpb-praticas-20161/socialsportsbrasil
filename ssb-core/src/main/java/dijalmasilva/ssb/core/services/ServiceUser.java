@@ -77,4 +77,8 @@ public class ServiceUser {
     public List<Usuario> listarTodos(){
         return (List<Usuario>) dao.findAll();
     }
+    
+    public Usuario findById(Long id){
+        return dao.findOne(id);
+    }
 }
