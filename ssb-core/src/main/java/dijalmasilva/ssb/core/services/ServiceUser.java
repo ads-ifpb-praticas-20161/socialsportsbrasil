@@ -7,7 +7,6 @@ package dijalmasilva.ssb.core.services;
 
 import dijalmasilva.ssb.core.dao.UsuarioDao;
 import dijalmasilva.ssb.entidades.Usuario;
-import dijalmasilva.ssb.enums.Status;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -44,7 +43,7 @@ public class ServiceUser {
     
     public void desativarConta(Long id){
         Usuario u = dao.findOne(id);
-        u.setConta(Status.DESATIVADA);
+        u.setConta("DESATIVADA");
         dao.save(u);
     }
     

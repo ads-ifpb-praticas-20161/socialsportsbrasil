@@ -8,6 +8,9 @@ package dijalmasilva.ssb.web.app;
 import dijalmasilva.ssb.core.services.ServiceUser;
 import dijalmasilva.ssb.entidades.Usuario;
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +56,17 @@ public class ControladorUser {
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
-    public String newUser(Usuario usuario, HttpServletRequest req) {
+    public String newUser(String nome, String sobrenome, String email, String senha, String username, String dataNascimento, HttpServletRequest req) {
+        Usuario usuario = new Usuario();
+        usuario.setAmigos(new ArrayList<Usuario>());
+        usuario.setConta("ATIVADA");
+        usuario.setDataNascimento(Date.valueOf(dataNascimento));
+        usuario.setEmail(email);
+        usuario.setFoto(null);
+        usuario.setNome(nome);
+        usuario.setSenha(senha);
+        usuario.setSobrenome(sobrenome);
+        usuario.setUsername(username);
         Usuario user = serviceUser.salvarUsuario(usuario);
         if (user == null) {
             req.setAttribute("result", "Não foi possível criar a conta, verifique se todos os campos foram"

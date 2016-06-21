@@ -39,10 +39,6 @@
                     <label>Data de Nascimento:</label>
                     <input type="date" class="form-control" name="dataNascimento" required=""/>
                 </div><br>
-                <div class="form-horizontal">
-                    <label>Foto:</label>
-                    <input type="file" class="form-control" name="foto" />
-                </div><br>
             </div>
             <div>
                 <input type="submit" class="btn btn-primary btn-lg" value="Cadastrar-se" />
