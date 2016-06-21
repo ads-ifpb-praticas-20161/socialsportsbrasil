@@ -24,4 +24,9 @@ public class ControllerHome {
     public String newUser(){
         return "newUser";
     }
+    
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
 }

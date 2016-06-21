@@ -4,8 +4,6 @@
     Author     : dijalma
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <head lang="pt-br">
     <meta charset="UTF-8" />
     <script src="/assets/js/jquery-2.1.4.min.js" type="text/javascript"></script>

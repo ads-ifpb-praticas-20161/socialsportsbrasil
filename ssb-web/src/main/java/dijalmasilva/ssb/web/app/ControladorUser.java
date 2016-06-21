@@ -26,6 +26,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ControladorUser {
 
     private final ServiceUser serviceUser = new ServiceUser();
+    
+    @RequestMapping("/home")
+    public String home(){
+        return "home";
+    }
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
     public String login(String login, String senha, HttpServletRequest req) {
