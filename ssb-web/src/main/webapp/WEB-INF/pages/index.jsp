@@ -10,6 +10,9 @@
     <body class="text-center">
         <h1>Social Sports Brasil</h1>
         <br><br><br>
-        <a href="newUser"><button class="btn btn-default">Cadastre-se</button></a>
+        <div class="funcionalidades">
+            <a href="login"><button class="btn btn-default">Login</button></a>
+            <a href="newUser"><button class="btn btn-default">Cadastre-se</button></a>
+        </div>
     </body>
 </html>
