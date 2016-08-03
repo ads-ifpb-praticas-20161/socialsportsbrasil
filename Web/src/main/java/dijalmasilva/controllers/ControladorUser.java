@@ -125,7 +125,7 @@ public class ControladorUser {
 
     @RequestMapping(value = {"/search/{nome}"})
     public void buscarUsuario(@PathVariable String nome, HttpServletRequest req) {
-        
+
         List<Usuario> usuarios = serviceUser.buscarUsuarios(nome);
         System.out.println(usuarios.size());
         if(usuarios.isEmpty())
