@@ -7,12 +7,33 @@
 <!DOCTYPE html>
 <html>
     <%@include file="head.jsp" %>
-    <body class="text-center">
-        <h1>Social Sports Brasil</h1>
-        <br><br><br>
-        <div class="funcionalidades">
-            <a href="login"><button class="btn btn-default">Login</button></a>
-            <a href="newUser"><button class="btn btn-default">Cadastre-se</button></a>
+    <body class="text-center background-gradient">
+        <br><br>
+        <img src="/assets/imagens/icons/logo_name.png" width="250" alt="SocialSportsBrasil"/>
+        <br><br>
+        <hr class="line-logo">
+        <br>
+        <div id="modal-login" class="z-index-1">
+            <div class="modal-login-header">
+                <h3>Bem vindo!</h3>
+                <hr>
+            </div>
+            <form action="/user/login" method="POST">
+                <div class="form-group-lg">
+                    <input type="text" class="form-control" name="login" required="" placeholder="Nome de usuário"/>
+                </div>
+                <div class="form-group-lg">
+                    <input type="password" class="form-control" name="senha" required="" placeholder="Senha"/>
+                </div>
+                <hr>
+                <div>
+                    <input type="submit" class="btn btn-primary form-control" value="Entrar" />
+                </div>
+                <div>
+                    <a href="newUser"><input type="button" class="btn btn-success form-control" value="Cadastre-se" /></a>
+                </div><br>
+            </form>
         </div>
+        <br><br>
     </body>
 </html>

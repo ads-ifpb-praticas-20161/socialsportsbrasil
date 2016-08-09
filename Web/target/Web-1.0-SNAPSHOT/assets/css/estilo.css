@@ -13,6 +13,10 @@ and open the template in the editor.
     padding: 0
 }
 
+body {
+    color: white;
+}
+
 .form-control-sm {
     text-align: left;
     width: 400px;
@@ -34,6 +38,13 @@ header {
     padding: 10px;
 }
 
+.imgCadastro{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin: 4px;
+}
+
 #sair {
     position: relative;
     top: -50px !important;
@@ -42,7 +53,7 @@ header {
 
 .functionsUser {
     text-align: center;
-    background: #F3F3F3;
+    background: #ffb74d;
     padding: 10px;
     width: 20%;
     height: 570px;
@@ -83,4 +94,57 @@ header {
 
 .invisible {
     display: none;
+}
+
+.background-gradient {
+    background: linear-gradient(to right, #ff9800 , #ffa726);
+}
+
+#modal-login {
+    width: 60%;
+    min-width: 300px;
+    max-width: 450px;
+    height: auto;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 3px;
+}
+
+.modal-login-header{
+    padding-top: 2px !important;
+}
+
+#modal-login form{
+    margin: 0 auto;
+    width: 97%;
+}
+
+form div {
+    margin: 2px;
+}
+
+.line-logo {
+    margin: 0 auto;
+    min-width: 300px;
+    max-width: 450px;
+    width: 60%;
+}
+
+.z-index-2 {
+    box-shadow: 0 0 20px 1px #000;
+    z-index: 5;
+}
+
+.z-index-1 {
+    box-shadow: 0 0 10px 1px #000;
+    z-index: 4;
+}
+
+.modal-cadastro{
+    padding: 4px;
+    min-width: 300px;
+    max-width: 450px;
+    width: 60%;
+    margin: 0 auto;
+    background: #F3F3F3;
 }

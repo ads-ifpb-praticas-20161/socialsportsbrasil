@@ -59,12 +59,11 @@ public class ControladorUser {
         System.out.println(user);
         if (user == null) {
             req.setAttribute("result", "Nome de usuário ou senha inválidos.");
-            return "login";
         } else {
             req.getSession().setAttribute("user", user);
             req.setAttribute("result", "Bem vindo!");
-            return "home";
         }
+        return "home";
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
@@ -83,7 +82,7 @@ public class ControladorUser {
                     + "\n Faça login e aproveite!");
         }
 
-        return "login";
+        return "redirect:/home";
     }
 
     @RequestMapping("/cancel")

@@ -5,7 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<header>
+<header class="background-gradient z-index-1">
     <div class="text-left">
         <c:if test="${user.foto == null}">
             <img src="/assets/imagens/boy.svg" alt="${user.username}" class="imgPerfil"/>
@@ -13,9 +13,9 @@
         <c:if test="${user.foto != null}">
             <img src="/user/image/${user.id}" alt="${user.username}" class="imgPerfil"/>
         </c:if>
-        <label>${user.username}</label>
+        <label class="text-capitalize" style="color: white">${user.username} ${user.sobrenome}</label>
     </div>
     <div class="text-right">
-        <a href="/user/logout" id="sair"><button class="btn btn-warning">Sair</button></a>
+        <a href="/user/logout" id="sair"><button class="btn btn-danger">Sair</button></a>
     </div>
 </header>

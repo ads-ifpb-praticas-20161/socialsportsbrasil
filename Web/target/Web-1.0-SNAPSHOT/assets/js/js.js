@@ -27,3 +27,20 @@ function buscaUsuarios(campo){
         }
     });
 }
+
+function escolherFoto(){
+    $('#inputImagem').trigger('click');
+}
+
+function loadPicture(valor) {
+    var reader = new FileReader(valor);
+    reader.onload = function (e) {
+        setImage(e.target.result);
+    };
+
+    reader.readAsDataURL(valor.files[0]);
+}
+
+function setImage(image) {
+    $('.imgCadastro').attr('src', image);
+}

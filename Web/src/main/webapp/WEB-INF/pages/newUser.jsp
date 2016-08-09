@@ -9,46 +9,50 @@
 <!DOCTYPE html>
 <html>
     <%@include file="head.jsp" %>
-    <body class="text-center">
+    <body class="text-center background-gradient">
         <h1>Novo usuário</h1>
+        <br>
+        <div class="modal-cadastro z-index-2">
+            <form class="form-group-sm" action="/user/new" method="POST" enctype="multipart/form-data">
+
+                <div class="form-horizontal text-center">
+                    <img src="/assets/imagens/boy.svg" class="imgCadastro" alt="Imagem do perfil"/> 
+                    <div>
+                        <input type="button" class="btn btn-primary form-control" name="foto" id="buttonImagem" value="Escolher imagem" onclick="escolherFoto()" />
+                        <input type="file" class="invisible" name="foto" id="inputImagem" onchange="loadPicture(this)"/>
+                    </div>
+                </div>
+                <div class="form-group-lg">
+                    <input type="text" class="form-control" name="nome" required="" placeholder="Nome"/>
+                </div>
+                <div class="form-group-lg">
+                    <input type="text" class="form-control" name="sobrenome" required="" placeholder="Sobrenome"/>
+                </div>
+                <div class="form-group-lg">
+                    <input type="text" class="form-control" name="username" required="" placeholder="Username"/>
+                </div>
+                <div class="form-group-lg">
+                    <input type="email" class="form-control" name="email" required="" placeholder="Email"/>
+                </div>
+                <div class="form-group-lg">
+                    <input type="password" class="form-control" name="senha" required="" placeholder="Senha"/>
+                </div>
+                <div class="form-group-lg">
+                    <input type="date" class="form-control" name="dataDeNascimento" required="" title="Data de Nascimento"/>
+                </div>
+
+                <br>
+                <div>
+                    <input type="submit" class="btn btn-success form-control" value="Cadastrar-se" />
+                </div>
+                <div>
+                    <a href="home"><input type="button" class="btn btn-primary form-control" value="Voltar" /></a>
+                </div>
+            </form>
+        </div>
         <br><br>
-        <form class="form-group-sm" action="/user/new" method="POST" enctype="multipart/form-data">
-            <div class="form-control-sm">
-                <div class="form-horizontal">
-                    <label>Foto:</label>
-                    <input type="file" class="form-control" name="foto"/>
-                </div><br>
-                <div class="form-horizontal">
-                    <label>Nome*:</label>
-                    <input type="text" class="form-control" name="nome" required=""/>
-                </div><br>
-                <div class="form-horizontal">
-                    <label>Sobrenome*:</label>
-                    <input type="text" class="form-control" name="sobrenome" required=""/>
-                </div><br>
-                <div class="form-horizontal">
-                    <label>Username*:</label>
-                    <input type="text" class="form-control" name="username" required=""/>
-                </div><br>
-                <div class="form-horizontal">
-                    <label>Email*:</label>
-                    <input type="email" class="form-control" name="email" required=""/>
-                </div><br>
-                <div class="form-horizontal">
-                    <label>Senha*:</label>
-                    <input type="password" class="form-control" name="senha" required=""/>
-                </div><br>
-                <div class="form-horizontal">
-                    <label>Data de Nascimento*:</label>
-                    <input type="date" class="form-control" name="dataDeNascimento" required=""/>
-                </div><br>
-            </div>
-            <div>
-                <input type="submit" class="btn btn-primary btn-lg" value="Cadastrar-se" />
-            </div><br><br>
-        </form>
-    <c:if test="${result != null}" >
-        <%@include file="notification.jsp" %>
-    </c:if>
-</body>
+        <c:if test="${result != null}" >
+            <%@include file="notification.jsp" %>
+        </c:if>
+    </body>
 </html>
