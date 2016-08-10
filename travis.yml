@@ -1,0 +1,16 @@
+
+language: java
+jdk:
+  - oraclejdk8
+branches:
+  only:
+    bheroku
+install: mvn install -U -DskipTests=true
+script:
+  mvn integration-test verify -Ptest
+deploy:
+  provider: heroku
+  api_key:
+    secure: "c0b3006b-b842-40c0-9181-7a5f2993ff9d" # API Key, encontrado em Account Settings
+  on: bheroku # Configuração de branch
+  app: social-sports-brasil # Nome da app no Heroku
