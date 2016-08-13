@@ -13,17 +13,22 @@
         <%@include file="header.jsp" %>
         <%@include file="asideUser.jsp" %>
         <aside class="conteudo">
-            <br><br><br>
-            <h2>Nome do suposto amigo</h2>
-            <br><br>
-            <h4>Pontos: 0</h4>
+            <div>
+                <c:if test="${outroUsuario.foto == null}">
+                    <img src="/assets/imagens/boy.svg" alt="${outroUsuario.username}" align="down" class="imgVisit"/>
+                </c:if>
+                <c:if test="${outroUsuario.foto != null}">
+                    <img src="/user/image/${outroUsuario.id}" alt="${outroUsuario.username}" align="down" class="imgVisit"/>
+                </c:if>
+                <h4>${outroUsuario.nome} /<span> Pontos: 0</span></h4>
+            </div>
             <br><br><br><br>
             <div>
-                <input class="btn btn-lg btn-success" value="Solicitar Amizade" type="submit" />
+                <input class="btn btn-lg btn-primary" value="Solicitar Amizade" type="submit" />
             </div>
         </aside>
-    <c:if test="${result != null}" >
-        <%@include file="notification.jsp" %>
-    </c:if>
+        <c:if test="${result != null}" >
+            <%@include file="notification.jsp" %>
+        </c:if>
     </body>
 </html>

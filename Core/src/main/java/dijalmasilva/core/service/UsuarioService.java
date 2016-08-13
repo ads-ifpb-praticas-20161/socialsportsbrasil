@@ -33,4 +33,6 @@ public interface UsuarioService {
     List<Usuario> listarTodos();
 
     Usuario findById(Long id);
+    
+    List<Usuario> buscarUsuariosComIdDiferente(String nome, Long id);
 }

@@ -11,7 +11,6 @@ import dijalmasilva.form.UsuarioForm;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletOutputStream;
@@ -56,7 +55,6 @@ public class ControladorUser {
     public String login(String login, String senha, HttpServletRequest req) {
         Usuario user = null;
         user = serviceUser.login(login, senha);
-        System.out.println(user);
         if (user == null) {
             req.setAttribute("result", "Nome de usuário ou senha inválidos.");
         } else {
@@ -92,14 +90,23 @@ public class ControladorUser {
     }
 
     @RequestMapping(value = {"/update"})
-    public String atualizarPerfil(Usuario u, HttpServletRequest req) {
-        Usuario user = serviceUser.atualizarPerfil(u);
-
+    public String atualizarPerfil(UsuarioForm u, HttpServletRequest req, MultipartFile foto) throws IOException {
+        Usuario usuario = this.convertToUsuario(u, null);
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        
+        if (foto.getSize() != 0) {
+            usuario.setFoto(foto.getBytes());
+        }
+        
         if (user == null) {
-            return "erro/atualizarPerfil";
+            req.setAttribute("result", "Não foi possível criar a conta, verifique se todos os campos foram"
+                    + " preenchidos corretamente!");
+        } else {
+            req.setAttribute("result", "Usuário cadastrado com sucesso."
+                    + "\n Faça login e aproveite!");
         }
 
-        return "";
+        return "redirect:/home";
     }
 
     @RequestMapping(value = {"/addFriend"}, method = RequestMethod.POST)
@@ -122,13 +129,17 @@ public class ControladorUser {
         return "removerAmigo";
     }
 
-    @RequestMapping(value = {"/search/{nome}"})
-    public void buscarUsuario(@PathVariable String nome, HttpServletRequest req) {
-        
-        List<Usuario> usuarios = serviceUser.buscarUsuarios(nome);
-        System.out.println(usuarios.size());
-        if(usuarios.isEmpty())
+    @RequestMapping(value = {"/searchUsers"})
+    public String buscarUsuario(String nome, HttpServletRequest req) {
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        List<Usuario> usuarios = serviceUser.buscarUsuariosComIdDiferente(nome, user.getId());
+        if (usuarios.isEmpty()) {
+            req.setAttribute("result", "Nenhum usuário encontrado com esse nome.");
+        }
+
         req.getSession().setAttribute("usuariosEncontrados", usuarios);
+
+        return "usersfind";
     }
 
     @RequestMapping("/otherUsers")
@@ -160,8 +171,9 @@ public class ControladorUser {
 
     private Usuario convertToUsuario(UsuarioForm u, LocalDate data) {
         Usuario usuario = new Usuario();
-
-        usuario.setDataDeNascimento(data);
+        if (data != null) {
+            usuario.setDataDeNascimento(data);
+        }
         usuario.setEmail(u.getEmail());
         usuario.setNome(u.getNome());
         usuario.setSenha(u.getSenha());
@@ -170,4 +182,8 @@ public class ControladorUser {
 
         return usuario;
     }
+    
+//    private Usuario atualizaUsuario(Usuario user, Usuario usuarioNovo){
+//        
+//    }
 }

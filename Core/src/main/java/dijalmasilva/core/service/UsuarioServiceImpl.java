@@ -113,4 +113,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarios;
     }
 
+    @Override
+    public List<Usuario> buscarUsuariosComIdDiferente(String nome, Long id) {
+        List<Usuario> usuariosEncontrados = dao.findByUsernameContainingAndIdNot(nome, id);
+        return usuariosEncontrados;
+    }
+
 }
