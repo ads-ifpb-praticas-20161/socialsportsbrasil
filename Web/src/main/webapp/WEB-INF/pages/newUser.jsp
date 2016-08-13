@@ -10,7 +10,7 @@
 <html>
     <%@include file="head.jsp" %>
     <body class="text-center background-gradient">
-        <h1>Novo usuário</h1>
+        <h1 style="color: white">Novo usuário</h1>
         <br>
         <div class="modal-cadastro z-index-2">
             <form class="form-group-sm" action="/user/new" method="POST" enctype="multipart/form-data">

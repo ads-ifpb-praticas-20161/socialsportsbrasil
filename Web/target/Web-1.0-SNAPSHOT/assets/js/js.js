@@ -6,19 +6,11 @@
 
 
 $(document).ready(function (){
-    
-    $('#notification').mouseenter(function (){
-        fecharNotificacao();
-    });
+  
 });
 
-function fecharNotificacao(){
-    
-    $('#notification').fadeOut(4000);
-}
-
-function buscaUsuarios(campo){
-    nome = $(campo).val();
+function buscaUsuarios(){
+    nome = $('#nomeUsuario').val();
     console.log(nome);
     $.ajax({
         url: "/user/search/"+nome+"",

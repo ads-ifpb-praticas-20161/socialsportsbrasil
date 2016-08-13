@@ -11,12 +11,14 @@
     <br><br>
     <a href="#">Ver Amigos</a>
     <br><br>
-    <div class="form-group-sm">
-        <input type="text" class="form-control" placeholder="Buscar usuário" onkeyup="buscaUsuarios(this)"/>
-    </div>
-    <div class="text-right">
-        <input type="submit" value="Buscar" class="btn btn-sm btn-default" />
-    </div>
+    <form action="/user/searchUsers" method="POST">
+        <div class="form-group-sm">
+            <input type="text" class="form-control" placeholder="Buscar usuário" id="nomeUsuario" name="nome"/>
+        </div>
+        <div class="text-right">
+            <input type="submit" value="Buscar" class="btn btn-sm btn-default" onsubmit="buscaUsuarios()"/>
+        </div>
+    </form>
     <br><br>
     <a href="#">Ver Grupos</a>
     <br><br>

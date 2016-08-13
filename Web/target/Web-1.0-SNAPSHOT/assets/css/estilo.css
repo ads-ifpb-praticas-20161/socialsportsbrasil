@@ -14,7 +14,7 @@ and open the template in the editor.
 }
 
 body {
-    color: white;
+    color: black;
 }
 
 .form-control-sm {
@@ -80,16 +80,20 @@ header {
     position: fixed;
     width: 100%;
     bottom: 40px;
+    -webkit-animation-delay: 3s;
 }
 
 .modal-notification {
     background: #F3F3F3;
     margin: 0 auto;
-    width: 400px;
-    padding: 8px;
-    box-shadow: 0px 0px 6px -1px #000;
-    border-radius: 5px;
+    width: 360px;
+    min-height: 80px;
+    box-shadow: 0px 5px 20px -2px #000;
     text-align: center;
+}
+
+.modal-notification h4 {
+    padding: 2px;
 }
 
 .invisible {
@@ -147,4 +151,10 @@ form div {
     width: 60%;
     margin: 0 auto;
     background: #F3F3F3;
+}
+
+.imgVisit{
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
 }
