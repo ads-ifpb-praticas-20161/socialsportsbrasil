@@ -14,6 +14,9 @@
         <aside class="conteudo">
             <h3>Feed</h3>
         </aside>
-        <%@include file="notification.jsp" %>
+        <c:if test="${result != null}">
+            <%@include file="notification.jsp" %>
+        </c:if>
+        <%@include file="modalImagem.jsp" %>
     </body>
 </html>

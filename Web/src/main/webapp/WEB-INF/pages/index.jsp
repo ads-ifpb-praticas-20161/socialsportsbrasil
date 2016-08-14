@@ -3,6 +3,7 @@
     Created on : 15/06/2016, 14:10:42
     Author     : Dijalma Silva <dijalmacz@gmail.com>
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,10 +31,13 @@
                     <input type="submit" class="btn btn-primary form-control" value="Entrar" />
                 </div>
                 <div>
-                    <a href="newUser"><input type="button" class="btn btn-success form-control" value="Cadastre-se" /></a>
+                    <a href="/newUser"><input type="button" class="btn btn-success form-control" value="Cadastre-se" /></a>
                 </div><br>
             </form>
         </div>
         <br><br>
-    </body>
+    <c:if test="${result != null}" >
+        <%@include file="notification.jsp" %>
+    </c:if>
+</body>
 </html>

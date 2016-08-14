@@ -11,11 +11,12 @@
             <img src="/assets/imagens/boy.svg" alt="${user.username}" class="imgPerfil"/>
         </c:if>
         <c:if test="${user.foto != null}">
-            <img src="/user/image/${user.id}" alt="${user.username}" class="imgPerfil"/>
+            <img src="/user/image/${user.id}" alt="${user.username}" class="imgPerfil" onclick="abrirImagemDoUsuario(${user.id})"/>
         </c:if>
         <label class="text-capitalize" style="color: white">${user.username} ${user.sobrenome}</label>
     </div>
     <div class="text-right">
-        <a href="/user/logout" id="sair"><button class="btn btn-danger">Sair</button></a>
+        <a href="/user/logout" id="sair"><img src="/assets/imagens/logout.png" title="Sair" width="30"/></a>
     </div>
+    <%@include file="modalImagem.jsp" %>
 </header>

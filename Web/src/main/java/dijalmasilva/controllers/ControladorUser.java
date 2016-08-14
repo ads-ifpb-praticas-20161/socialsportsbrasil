@@ -57,6 +57,7 @@ public class ControladorUser {
         user = serviceUser.login(login, senha);
         if (user == null) {
             req.setAttribute("result", "Nome de usuário ou senha inválidos.");
+            return "index";
         } else {
             req.getSession().setAttribute("user", user);
             req.setAttribute("result", "Bem vindo!");
@@ -83,56 +84,64 @@ public class ControladorUser {
         return "redirect:/home";
     }
 
-    @RequestMapping("/cancel")
-    public void cancelUser(Long id, HttpServletResponse res) throws IOException {
+    @RequestMapping("/disable/{id}")
+    public String cancelUser(@PathVariable Long id, HttpServletRequest req) throws IOException {
         serviceUser.desativarConta(id);
-        res.sendRedirect("/home");
+        req.getSession().invalidate();
+        req.setAttribute("result", "Sua conta foi desativada.");
+        
+        return "redirect:/home";
     }
 
     @RequestMapping(value = {"/update"})
     public String atualizarPerfil(UsuarioForm u, HttpServletRequest req, MultipartFile foto) throws IOException {
         Usuario usuario = this.convertToUsuario(u, null);
         Usuario user = (Usuario) req.getSession().getAttribute("user");
-        
+        atualizaUsuario(user, usuario);
         if (foto.getSize() != 0) {
-            usuario.setFoto(foto.getBytes());
+            user.setFoto(foto.getBytes());
         }
         
         if (user == null) {
-            req.setAttribute("result", "Não foi possível criar a conta, verifique se todos os campos foram"
+            req.setAttribute("result", "Não foi possível atualizar a conta, verifique se todos os campos foram"
                     + " preenchidos corretamente!");
         } else {
-            req.setAttribute("result", "Usuário cadastrado com sucesso."
-                    + "\n Faça login e aproveite!");
+            req.setAttribute("result", "Conta atualizada com sucesso.");
         }
 
-        return "redirect:/home";
+        return "redirect:/user/home";
     }
 
-    @RequestMapping(value = {"/addFriend"}, method = RequestMethod.POST)
-    public String adicionarAmigo(Long id, Long amigo, HttpServletRequest req) {
-        Usuario user = serviceUser.adicionarAmigo(id, amigo);
+    @RequestMapping(value = {"/follow/{id}"}, method = RequestMethod.GET)
+    public String adicionarAmigo(@PathVariable Long id, HttpServletRequest req) {
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        user = serviceUser.adicionarAmigo(user.getId(), id);
         if (user == null) {
-            return "erro/amigoNovo";
+            return "erro";
+        }else{
+            req.getSession().setAttribute("user", user);
         }
 
-        return "novoAmigo";
+        return "redirect:/user/otherUser/"+id;
     }
 
-    @RequestMapping(value = {"/removeFriend"}, method = RequestMethod.POST)
-    public String removerAmigo(Long id, Long amigo, HttpServletRequest req) {
-        Usuario user = serviceUser.removerAmigo(id, amigo);
+    @RequestMapping(value = {"/unfollow/{id}"}, method = RequestMethod.GET)
+    public String removerAmigo(@PathVariable Long id, HttpServletRequest req) {
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        user = serviceUser.removerAmigo(user.getId(), id);
         if (user == null) {
-            return "erro/removerAmigo";
+            return "erro";
+        }else{
+            req.getSession().setAttribute("user", user);
         }
 
-        return "removerAmigo";
+        return "redirect:/user/otherUser/"+id;
     }
 
     @RequestMapping(value = {"/searchUsers"})
     public String buscarUsuario(String nome, HttpServletRequest req) {
         Usuario user = (Usuario) req.getSession().getAttribute("user");
-        List<Usuario> usuarios = serviceUser.buscarUsuariosComIdDiferente(nome, user.getId());
+        List<Usuario> usuarios = serviceUser.buscarUsuariosComIdDiferenteAndNaoDesativada(nome, user.getId());
         if (usuarios.isEmpty()) {
             req.setAttribute("result", "Nenhum usuário encontrado com esse nome.");
         }
@@ -183,7 +192,14 @@ public class ControladorUser {
         return usuario;
     }
     
-//    private Usuario atualizaUsuario(Usuario user, Usuario usuarioNovo){
-//        
-//    }
+    @RequestMapping("/editProfile")
+    public String editarPerfil(){
+        return "editProfile";
+    }
+    
+    private void atualizaUsuario(Usuario user, Usuario usuarioNovo){
+        user.setNome(usuarioNovo.getNome());
+        user.setSobrenome(usuarioNovo.getSobrenome());
+        user.setSenha(usuarioNovo.getSenha());
+    }
 }

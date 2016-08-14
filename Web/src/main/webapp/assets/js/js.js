@@ -36,3 +36,16 @@ function loadPicture(valor) {
 function setImage(image) {
     $('.imgCadastro').attr('src', image);
 }
+
+function desativarConta(){
+    $('#modalConfirmacao').removeClass('invisible');
+}
+
+function fecharBackdrop(){
+    $('.modal-backdrop').addClass('invisible');
+}
+
+function abrirImagemDoUsuario(id){
+    $('#fotoSelecionada').attr('src', '/user/image/'+id);
+    $('#modalImagem').removeClass("invisible");
+}

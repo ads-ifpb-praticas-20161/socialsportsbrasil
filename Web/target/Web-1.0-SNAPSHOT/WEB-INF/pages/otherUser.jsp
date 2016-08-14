@@ -18,13 +18,18 @@
                     <img src="/assets/imagens/boy.svg" alt="${outroUsuario.username}" align="down" class="imgVisit"/>
                 </c:if>
                 <c:if test="${outroUsuario.foto != null}">
-                    <img src="/user/image/${outroUsuario.id}" alt="${outroUsuario.username}" align="down" class="imgVisit"/>
+                    <img src="/user/image/${outroUsuario.id}" alt="${outroUsuario.username}" align="down" class="imgVisit" onclick="abrirImagemDoUsuario(${outroUsuario.id})"/>
                 </c:if>
-                <h4>${outroUsuario.nome} /<span> Pontos: 0</span></h4>
+                <h4>${outroUsuario.nome} /<span> Pontos: ${outroUsuario.pontos}</span></h4>
             </div>
             <br><br><br><br>
             <div>
-                <input class="btn btn-lg btn-primary" value="Solicitar Amizade" type="submit" />
+                <c:if test="${user.isFollowing(outroUsuario.id) == false}">
+                    <a class="btn btn-lg btn-primary" href="/user/follow/${outroUsuario.id}">Seguir</a>
+                </c:if>
+                <c:if test="${user.isFollowing(outroUsuario.id) != false}">
+                    <a class="btn btn-lg btn-danger" href="/user/unfollow/${outroUsuario.id}">Deixar de seguir</a>
+                </c:if>
             </div>
         </aside>
         <c:if test="${result != null}" >

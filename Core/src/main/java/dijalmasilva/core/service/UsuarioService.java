@@ -34,5 +34,7 @@ public interface UsuarioService {
 
     Usuario findById(Long id);
     
-    List<Usuario> buscarUsuariosComIdDiferente(String nome, Long id);
+    List<Usuario> buscarUsuariosComIdDiferenteAndNaoDesativada(String nome, Long id);
+    
+    boolean isFollow(Long id, Long seguindo);
 }

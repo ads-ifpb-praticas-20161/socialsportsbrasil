@@ -7,7 +7,7 @@
 <br><br><br><br>
 <aside class="functionsUser">
     <br><br>
-    <label>Pontos: 0</label>
+    <label>Pontos: ${user.pontos}</label>
     <br><br>
     <a href="#">Ver Amigos</a>
     <br><br>
@@ -36,9 +36,10 @@
         <label>Segurança</label>
         <br><br>
         <div class="text-left">
-            <a href="#">Editar Perfil</a>
+            <a href="/user/editProfile">Editar Perfil</a>
             <br><br>
-            <a href="#">Desativar Conta</a>
+            <a href="#" onclick="desativarConta()">Desativar Conta</a>
         </div>
     </div>
+    <%@include file="modalConfirmacao.jsp" %>
 </aside>

@@ -8,6 +8,7 @@ package dijalmasilva.core.service;
 import dijalmasilva.core.repository.UsuarioDao;
 import dijalmasilva.entidades.Usuario;
 import java.util.List;
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -114,8 +115,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<Usuario> buscarUsuariosComIdDiferente(String nome, Long id) {
-        List<Usuario> usuariosEncontrados = dao.findByUsernameContainingAndIdNot(nome, id);
+    public boolean isFollow(Long id, Long seguindo) {
+        Usuario user = dao.findOne(id);
+        return user.isFollowing(seguindo);
+    }
+
+    @Override
+    public List<Usuario> buscarUsuariosComIdDiferenteAndNaoDesativada(String nome, Long id) {
+        List<Usuario> usuariosEncontrados = dao.findByUsernameContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
         return usuariosEncontrados;
     }
 

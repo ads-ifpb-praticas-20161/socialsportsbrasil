@@ -15,6 +15,7 @@ and open the template in the editor.
 
 body {
     color: black;
+    height: 100%;
 }
 
 .form-control-sm {
@@ -32,16 +33,15 @@ header {
 }
 
 .imgPerfil {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    padding: 10px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    cursor: pointer
 }
 
 .imgCadastro{
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
+    max-height: 110px;
+    width: auto;
     margin: 4px;
 }
 
@@ -53,7 +53,7 @@ header {
 
 .functionsUser {
     text-align: center;
-    background: #ffb74d;
+    background: #eceff1;
     padding: 10px;
     width: 20%;
     height: 570px;
@@ -81,6 +81,7 @@ header {
     width: 100%;
     bottom: 40px;
     -webkit-animation-delay: 3s;
+    z-index: -1;
 }
 
 .modal-notification {
@@ -101,7 +102,7 @@ header {
 }
 
 .background-gradient {
-    background: linear-gradient(to right, #ff9800 , #ffa726);
+    background: linear-gradient(to right, #607d8b , #546e7a);
 }
 
 #modal-login {
@@ -155,6 +156,33 @@ form div {
 
 .imgVisit{
     margin-top: 20px;
-    width: 200px;
+    width: auto;
+    cursor: pointer;
     height: 200px;
+}
+
+.modal_confirmacao{
+    width: 450px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.modal-imagem {
+    margin: 0 auto;
+    max-width: 900px;
+    height: auto;
+    margin-top: 10px;
+}
+
+#fotoSelecionada{
+    height: 550px;
+    width: auto;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.modal-body-imagem{
+    padding: 0px !important; 
+    background: #000;
+    opacity: 0.9;
 }
