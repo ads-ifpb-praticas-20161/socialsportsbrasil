@@ -17,7 +17,7 @@
                 <br><br><br>
                 <div class="row">
                     <c:forEach items="${usuariosEncontrados}" var="usuario">
-                        <div class="col-lg-3 col-sm-3 col-xs-2">
+                        <div class="col-lg-3 col-sm-4 col-xs-12 col-md-4">
                             <c:if test="${usuario.foto == null}">
                                 <img src="/assets/imagens/boy.svg" alt="${usuario.nome}" class="imgPerfil">
                             </c:if>

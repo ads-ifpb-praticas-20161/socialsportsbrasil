@@ -16,8 +16,10 @@
                 e senha.</p>
                 <br>
                 <br>
-                <a href="/user/disable/${user.id}" class="btn btn-primary">Confirmar</a>
-                <a href="#" onclick="fecharBackdrop()" class="btn btn-danger">Cancelar</a>
+                <div class="text-center">
+                    <a href="/user/disable/${user.id}" class="btn btn-primary">Confirmar</a>
+                    <a href="#" onclick="fecharBackdrop()" class="btn btn-danger">Cancelar</a>
+                </div>
             </div>
         </div>
     </div>

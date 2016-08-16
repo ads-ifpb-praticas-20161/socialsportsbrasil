@@ -5,22 +5,34 @@
  */
 
 
-$(document).ready(function (){
-  
+$(document).ready(function () {
+    $('.aside-lateral').css({
+        height: $(window).height() + 'px'
+    });
+    $(window).resize(function () {
+        height = $(window).height();
+        $('.aside-lateral').css({
+            height: height + 'px'
+        });
+    });
+
+    $('.aside-responsivo').click(function () {
+        $('#modalLateral').removeClass('invisible');
+    });
 });
 
-function buscaUsuarios(){
+function buscaUsuarios() {
     nome = $('#nomeUsuario').val();
     console.log(nome);
     $.ajax({
-        url: "/user/search/"+nome+"",
+        url: "/user/search/" + nome + "",
         success: function (result) {
-            console.log("Deu certo - "+result);
+            console.log("Deu certo - " + result);
         }
     });
 }
 
-function escolherFoto(){
+function escolherFoto() {
     $('#inputImagem').trigger('click');
 }
 
@@ -37,15 +49,20 @@ function setImage(image) {
     $('.imgCadastro').attr('src', image);
 }
 
-function desativarConta(){
+function desativarConta() {
     $('#modalConfirmacao').removeClass('invisible');
 }
 
-function fecharBackdrop(){
+function desativarContaInMobile(){
+    fecharBackdrop();
+    $('#modalConfirmacao').removeClass('invisible');
+}
+
+function fecharBackdrop() {
     $('.modal-backdrop').addClass('invisible');
 }
 
-function abrirImagemDoUsuario(id){
-    $('#fotoSelecionada').attr('src', '/user/image/'+id);
+function abrirImagemDoUsuario(id) {
+    $('#fotoSelecionada').attr('src', '/user/image/' + id);
     $('#modalImagem').removeClass("invisible");
 }

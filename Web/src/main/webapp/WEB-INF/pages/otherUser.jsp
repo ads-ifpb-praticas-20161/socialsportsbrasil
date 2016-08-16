@@ -20,7 +20,7 @@
                 <c:if test="${outroUsuario.foto != null}">
                     <img src="/user/image/${outroUsuario.id}" alt="${outroUsuario.username}" align="down" class="imgVisit" onclick="abrirImagemDoUsuario(${outroUsuario.id})"/>
                 </c:if>
-                <h4>${outroUsuario.nome} /<span> Pontos: ${outroUsuario.pontos}</span></h4>
+                <h4>${outroUsuario.nome} ${outroUsuario.sobrenome}/<span> Pontos: ${outroUsuario.pontos}</span></h4>
             </div>
             <br><br><br><br>
             <div>

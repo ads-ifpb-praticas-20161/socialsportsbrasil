@@ -17,7 +17,7 @@
                 <br><br><br>
                 <div class="row">
                     <c:forEach items="${user.amigos}" var="usuario">
-                        <div class="col-lg-3 col-sm-3 col-xs-2">
+                        <div class="col-lg-3 col-sm-4 col-xs-12 col-md-4">
                             <c:if test="${usuario.foto == null}">
                                 <img src="/assets/imagens/boy.svg" alt="${usuario.nome}" class="imgPerfil">
                             </c:if>
@@ -34,7 +34,7 @@
                 <br><br>
                 <h4>Faça uma busca agora por outros usuários.</h4>
                 <br><br>
-                <form action="/user/searchUsers" method="POST">
+                <form action="/user/searchUsers" method="POST" class="modal-sm modal-center">
                     <div class="form-group-sm">
                         <input type="text" class="form-control" placeholder="Buscar usuário" id="nomeUsuario" name="nome"/>
                     </div>
@@ -42,6 +42,7 @@
                         <input type="submit" value="Buscar" class="btn btn-sm btn-default" onsubmit="buscaUsuarios()"/>
                     </div>
                 </form>
+
             </c:if>
         </aside>
     </body>

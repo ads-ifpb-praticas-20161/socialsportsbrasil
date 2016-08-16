@@ -41,5 +41,4 @@
             <a href="#" onclick="desativarConta()">Desativar Conta</a>
         </div>
     </div>
-    <%@include file="modalConfirmacao.jsp" %>
 </aside>
