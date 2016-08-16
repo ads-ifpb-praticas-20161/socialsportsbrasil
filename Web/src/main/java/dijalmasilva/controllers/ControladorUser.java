@@ -101,12 +101,12 @@ public class ControladorUser {
         if (foto.getSize() != 0) {
             user.setFoto(foto.getBytes());
         }
-        
+        user = serviceUser.atualizarPerfil(user);
         if (user == null) {
-            req.setAttribute("result", "Não foi possível atualizar a conta, verifique se todos os campos foram"
+            req.setAttribute("result", "Não foi possível atualizar seu perfil, verifique se todos os campos foram"
                     + " preenchidos corretamente!");
         } else {
-            req.setAttribute("result", "Conta atualizada com sucesso.");
+            req.setAttribute("result", "Perfil atualizado com sucesso.");
         }
 
         return "redirect:/user/home";
@@ -141,7 +141,7 @@ public class ControladorUser {
     @RequestMapping(value = {"/searchUsers"})
     public String buscarUsuario(String nome, HttpServletRequest req) {
         Usuario user = (Usuario) req.getSession().getAttribute("user");
-        List<Usuario> usuarios = serviceUser.buscarUsuariosComIdDiferenteAndNaoDesativada(nome, user.getId());
+        List<Usuario> usuarios = serviceUser.buscarUsuariosComIdDiferenteAndNaoDesativada(nome.toLowerCase(), user.getId());
         if (usuarios.isEmpty()) {
             req.setAttribute("result", "Nenhum usuário encontrado com esse nome.");
         }
@@ -195,6 +195,11 @@ public class ControladorUser {
     @RequestMapping("/editProfile")
     public String editarPerfil(){
         return "editProfile";
+    }
+    
+    @RequestMapping("/following")
+    public String seguindo(){
+        return "following";
     }
     
     private void atualizaUsuario(Usuario user, Usuario usuarioNovo){

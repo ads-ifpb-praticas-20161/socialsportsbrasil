@@ -9,7 +9,7 @@
     <br><br>
     <label>Pontos: ${user.pontos}</label>
     <br><br>
-    <a href="#">Ver Amigos</a>
+    <a href="/user/following">Seguindo (${user.qtdeSeguindo()})</a>
     <br><br>
     <form action="/user/searchUsers" method="POST">
         <div class="form-group-sm">

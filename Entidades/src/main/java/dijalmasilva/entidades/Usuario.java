@@ -172,6 +172,10 @@ public class Usuario implements Serializable {
         this.grupos.remove(g);
     }
 
+    public int qtdeSeguindo(){
+        return this.amigos.size();
+    }
+    
     public boolean isFollowing(Long seguindo) {
         for (Usuario amigo : amigos) {
             if (Objects.equals(amigo.getId(), seguindo)) {

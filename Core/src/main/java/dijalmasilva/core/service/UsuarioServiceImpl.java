@@ -68,6 +68,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario user = dao.findOne(id);
         Usuario friend = dao.findOne(amigo);
         user.addAmigo(friend);
+        dao.save(friend);
         return dao.save(user);
     }
 
@@ -76,6 +77,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario user = dao.findOne(id);
         Usuario friend = dao.findOne(amigo);
         user.removeAmigo(friend);
+        dao.save(friend);
         return dao.save(user);
     }
 
