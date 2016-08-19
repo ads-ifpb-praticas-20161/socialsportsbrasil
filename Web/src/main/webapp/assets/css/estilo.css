@@ -181,6 +181,10 @@ form div {
     right: 20px;
 }
 
+#xclose-image img:hover{
+    padding: 2px;
+}
+
 #fotoSelecionada{
     height: 550px;
     width: auto;
@@ -236,6 +240,19 @@ form div {
 
 .modal-dark {
     opacity: 0.9;
+}
+
+#novoIdolo{
+    padding: 5px;
+    background: #5cb85c;
+    border: 1px solid #4cae4c;;
+    border-radius: 4px;
+    width: 45px;
+    height: 45px;
+}
+
+#novoIdolo:hover{
+    background: #449D44;
 }
 
 @media(max-width:1024px){

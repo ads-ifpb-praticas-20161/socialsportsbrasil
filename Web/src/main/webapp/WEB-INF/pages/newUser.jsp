@@ -43,7 +43,7 @@
 
                 <br>
                 <div>
-                    <input type="submit" class="btn btn-success form-control" value="Cadastrar-se" />
+                    <input type="submit" class="btn btn-success form-control" value="Cadastrar" />
                 </div>
                 <div>
                     <a href="home"><input type="button" class="btn btn-primary form-control" value="Voltar" /></a>

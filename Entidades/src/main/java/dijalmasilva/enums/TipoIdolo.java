@@ -11,6 +11,20 @@ package dijalmasilva.enums;
  */
 public enum TipoIdolo {
 
-    JOGADOR, ATLETA, GINASTA, CORREDOR, PILOTO, TIME, TENISTA, EQUIPE;
+    JOGADOR("Jogador"), ATLETA("Atleta"), GINASTA("Ginasta"), CORREDOR("Corredor"), PILOTO("Piloto"), TIME("Time"), TENISTA("Tenista"), EQUIPE("Equipe");
+    
+    private String tipo;
 
+    private TipoIdolo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
 }

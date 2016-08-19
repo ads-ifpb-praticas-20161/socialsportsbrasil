@@ -66,3 +66,7 @@ function abrirImagemDoUsuario(id) {
     $('#fotoSelecionada').attr('src', '/user/image/' + id);
     $('#modalImagem').removeClass("invisible");
 }
+
+function abrirNovoIdolo(){
+    $('#modal-newIdolo').removeClass("invisible");
+}

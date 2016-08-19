@@ -11,6 +11,20 @@ package dijalmasilva.enums;
  */
 public enum Esporte {
 
-    FUTEBOL, NATACAO, BASQUETE, VOLEI, TENIS, HANDEBOL, BOXE, CORRIDA, GINASTICA;
+    FUTEBOL("Futebol"), NATACAO("Natação"), BASQUETE("Basquete"), VOLEI("Vôlei"), TENIS("Tênis"), HANDEBOL("Handebol"), BOXE("Boxe"), CORRIDA("Corrida"), GINASTICA("Ginástica"), ATLETISMO("Atletismo");
+
+    private String tipo;
+
+    private Esporte(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
 }

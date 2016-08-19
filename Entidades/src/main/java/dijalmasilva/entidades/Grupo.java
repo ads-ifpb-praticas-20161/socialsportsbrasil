@@ -6,6 +6,7 @@
 package dijalmasilva.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,10 +34,8 @@ public class Grupo implements Serializable {
     private Idolo idolo;
     @Column(columnDefinition = "TEXT")
     private String descricao;
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] foto;
-    
-    public Grupo(){
+
+    public Grupo() {
     }
 
     public Grupo(Usuario dono, Idolo idolo) {
@@ -76,12 +75,36 @@ public class Grupo implements Serializable {
         this.descricao = descricao;
     }
 
-    public byte[] getFoto() {
-        return foto;
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
     }
 
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Grupo other = (Grupo) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.dono, other.dono)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Grupo{" + "id=" + id + ", dono=" + dono + ", nome=" + nome + ", idolo=" + idolo + ", descricao=" + descricao + '}';
     }
 
 }

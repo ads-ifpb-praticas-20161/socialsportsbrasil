@@ -43,7 +43,7 @@
                 </div>
             </form>
             <br>
-            <a href="#">Ver Grupos</a>
+            <a href="#">Ver Grupos (${user.qtdeGrupos()})</a>
             <br><br>
             <div class="form-group-sm">
                 <input type="text" class="form-control" placeholder="Buscar grupos" />
@@ -52,7 +52,7 @@
                 <input type="submit" value="Buscar" class="btn btn-sm btn-default" />
             </div>
             <div class="text-left">
-                <input type="submit" value="Criar" class="btn btn-sm btn-default" id="criaGrupo"/>
+                <a href="/group/new"><input type="button" value="Criar" class="btn btn-sm btn-default" id="criaGrupo"/></a>
             </div>
             <br>
             <div>
