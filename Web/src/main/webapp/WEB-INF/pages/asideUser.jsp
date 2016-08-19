@@ -7,16 +7,18 @@
 <br><br><br><br>
 <aside class="functionsUser">
     <br><br>
-    <label>Pontos: 0</label>
+    <label>Pontos: ${user.pontos}</label>
     <br><br>
-    <a href="#">Ver Amigos</a>
+    <a href="/user/following">Seguindo (${user.qtdeSeguindo()})</a>
     <br><br>
-    <div class="form-group-sm">
-        <input type="text" class="form-control" placeholder="Buscar usuário" onkeyup="buscaUsuarios(this)"/>
-    </div>
-    <div class="text-right">
-        <input type="submit" value="Buscar" class="btn btn-sm btn-default" />
-    </div>
+    <form action="/user/searchUsers" method="POST">
+        <div class="form-group-sm">
+            <input type="text" class="form-control" placeholder="Buscar usuário" id="nomeUsuario" name="nome"/>
+        </div>
+        <div class="text-right">
+            <input type="submit" value="Buscar" class="btn btn-sm btn-default" onsubmit="buscaUsuarios()"/>
+        </div>
+    </form>
     <br><br>
     <a href="#">Ver Grupos</a>
     <br><br>
@@ -34,9 +36,9 @@
         <label>Segurança</label>
         <br><br>
         <div class="text-left">
-            <a href="#">Editar Perfil</a>
+            <a href="/user/editProfile">Editar Perfil</a>
             <br><br>
-            <a href="#">Desativar Conta</a>
+            <a href="#" onclick="desativarConta()">Desativar Conta</a>
         </div>
     </div>
 </aside>

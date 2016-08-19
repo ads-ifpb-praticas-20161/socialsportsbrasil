@@ -24,4 +24,6 @@ public interface UsuarioDao extends CrudRepository<Usuario, Long>{
     public List<Usuario> findByEmailContaining(String email);
     
     public List<Usuario> findByUsernameContaining(String username);
+    
+    public List<Usuario> findByUsernameContainingAndIdNotAndContaNotLike(String username, Long id, String conta);
 }

@@ -13,17 +13,27 @@
         <%@include file="header.jsp" %>
         <%@include file="asideUser.jsp" %>
         <aside class="conteudo">
-            <br><br><br>
-            <h2>Nome do suposto amigo</h2>
-            <br><br>
-            <h4>Pontos: 0</h4>
+            <div>
+                <c:if test="${outroUsuario.foto == null}">
+                    <img src="/assets/imagens/boy.svg" alt="${outroUsuario.username}" align="down" class="imgVisit"/>
+                </c:if>
+                <c:if test="${outroUsuario.foto != null}">
+                    <img src="/user/image/${outroUsuario.id}" alt="${outroUsuario.username}" align="down" class="imgVisit" onclick="abrirImagemDoUsuario(${outroUsuario.id})"/>
+                </c:if>
+                <h4>${outroUsuario.nome} ${outroUsuario.sobrenome}/<span> Pontos: ${outroUsuario.pontos}</span></h4>
+            </div>
             <br><br><br><br>
             <div>
-                <input class="btn btn-lg btn-success" value="Solicitar Amizade" type="submit" />
+                <c:if test="${user.isFollowing(outroUsuario.id) == false}">
+                    <a class="btn btn-lg btn-primary" href="/user/follow/${outroUsuario.id}">Seguir</a>
+                </c:if>
+                <c:if test="${user.isFollowing(outroUsuario.id) != false}">
+                    <a class="btn btn-lg btn-danger" href="/user/unfollow/${outroUsuario.id}">Deixar de seguir</a>
+                </c:if>
             </div>
         </aside>
-    <c:if test="${result != null}" >
-        <%@include file="notification.jsp" %>
-    </c:if>
+        <c:if test="${result != null}" >
+            <%@include file="notification.jsp" %>
+        </c:if>
     </body>
 </html>

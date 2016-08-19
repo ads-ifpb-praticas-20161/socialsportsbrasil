@@ -43,12 +43,21 @@ public class Usuario implements Serializable {
     private String conta;
     @Basic(fetch = FetchType.LAZY)
     private byte[] foto;
+    private int pontos;
 
     @OneToMany(mappedBy = "dono")
     private List<Grupo> grupos;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Usuario> amigos;
+
+    public int getPontos() {
+        return pontos;
+    }
+
+    public void setPontos(int pontos) {
+        this.pontos = pontos;
+    }
 
     public Long getId() {
         return id;
@@ -119,12 +128,16 @@ public class Usuario implements Serializable {
             amigos = new ArrayList<>();
         }
         this.amigos.add(u);
+        this.pontos += 2;
+        u.setPontos(u.getPontos()+5);
     }
 
     public void removeAmigo(Usuario u) {
         if (amigos != null) {
             this.amigos.remove(u);
         }
+        this.pontos -= 2;
+        u.setPontos(u.getPontos()-5);
     }
 
     public String getConta() {
@@ -150,13 +163,27 @@ public class Usuario implements Serializable {
     public void setGrupos(List<Grupo> grupos) {
         this.grupos = grupos;
     }
-    
-    public void addGrupo(Grupo g){
+
+    public void addGrupo(Grupo g) {
         this.grupos.add(g);
     }
-    
-    public void removeGrupo(Grupo g){
+
+    public void removeGrupo(Grupo g) {
         this.grupos.remove(g);
+    }
+
+    public int qtdeSeguindo(){
+        return this.amigos.size();
+    }
+    
+    public boolean isFollowing(Long seguindo) {
+        for (Usuario amigo : amigos) {
+            if (Objects.equals(amigo.getId(), seguindo)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -188,7 +215,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", username=" + username + ", email=" + email + ", senha=" + senha + ", dataDeNascimento=" + dataDeNascimento + ", conta=" + conta + ", foto=" + foto + ", amigos=" + amigos + '}';
+        return "Usuario{" + "id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", username=" + username + ", email=" + email + ", senha=" + senha + ", dataDeNascimento=" + dataDeNascimento + ", conta=" + conta + ", foto=" + foto + ", pontos=" + pontos + ", grupos=" + grupos + ", amigos=" + amigos + '}';
     }
 
 }

@@ -11,7 +11,6 @@ import dijalmasilva.form.UsuarioForm;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletOutputStream;
@@ -56,9 +55,9 @@ public class ControladorUser {
     public String login(String login, String senha, HttpServletRequest req) {
         Usuario user = null;
         user = serviceUser.login(login, senha);
-        System.out.println(user);
         if (user == null) {
             req.setAttribute("result", "Nome de usuário ou senha inválidos.");
+            return "index";
         } else {
             req.getSession().setAttribute("user", user);
             req.setAttribute("result", "Bem vindo!");
@@ -85,50 +84,71 @@ public class ControladorUser {
         return "redirect:/home";
     }
 
-    @RequestMapping("/cancel")
-    public void cancelUser(Long id, HttpServletResponse res) throws IOException {
+    @RequestMapping("/disable/{id}")
+    public String cancelUser(@PathVariable Long id, HttpServletRequest req) throws IOException {
         serviceUser.desativarConta(id);
-        res.sendRedirect("/home");
+        req.getSession().invalidate();
+        req.setAttribute("result", "Sua conta foi desativada.");
+        
+        return "redirect:/home";
     }
 
     @RequestMapping(value = {"/update"})
-    public String atualizarPerfil(Usuario u, HttpServletRequest req) {
-        Usuario user = serviceUser.atualizarPerfil(u);
-
+    public String atualizarPerfil(UsuarioForm u, HttpServletRequest req, MultipartFile foto) throws IOException {
+        Usuario usuario = this.convertToUsuario(u, null);
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        atualizaUsuario(user, usuario);
+        if (foto.getSize() != 0) {
+            user.setFoto(foto.getBytes());
+        }
+        user = serviceUser.atualizarPerfil(user);
         if (user == null) {
-            return "erro/atualizarPerfil";
+            req.setAttribute("result", "Não foi possível atualizar seu perfil, verifique se todos os campos foram"
+                    + " preenchidos corretamente!");
+        } else {
+            req.setAttribute("result", "Perfil atualizado com sucesso.");
         }
 
-        return "";
+        return "redirect:/user/home";
     }
 
-    @RequestMapping(value = {"/addFriend"}, method = RequestMethod.POST)
-    public String adicionarAmigo(Long id, Long amigo, HttpServletRequest req) {
-        Usuario user = serviceUser.adicionarAmigo(id, amigo);
+    @RequestMapping(value = {"/follow/{id}"}, method = RequestMethod.GET)
+    public String adicionarAmigo(@PathVariable Long id, HttpServletRequest req) {
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        user = serviceUser.adicionarAmigo(user.getId(), id);
         if (user == null) {
-            return "erro/amigoNovo";
+            return "erro";
+        }else{
+            req.getSession().setAttribute("user", user);
         }
 
-        return "novoAmigo";
+        return "redirect:/user/otherUser/"+id;
     }
 
-    @RequestMapping(value = {"/removeFriend"}, method = RequestMethod.POST)
-    public String removerAmigo(Long id, Long amigo, HttpServletRequest req) {
-        Usuario user = serviceUser.removerAmigo(id, amigo);
+    @RequestMapping(value = {"/unfollow/{id}"}, method = RequestMethod.GET)
+    public String removerAmigo(@PathVariable Long id, HttpServletRequest req) {
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        user = serviceUser.removerAmigo(user.getId(), id);
         if (user == null) {
-            return "erro/removerAmigo";
+            return "erro";
+        }else{
+            req.getSession().setAttribute("user", user);
         }
 
-        return "removerAmigo";
+        return "redirect:/user/otherUser/"+id;
     }
 
-    @RequestMapping(value = {"/search/{nome}"})
-    public void buscarUsuario(@PathVariable String nome, HttpServletRequest req) {
-        
-        List<Usuario> usuarios = serviceUser.buscarUsuarios(nome);
-        System.out.println(usuarios.size());
-        if(usuarios.isEmpty())
+    @RequestMapping(value = {"/searchUsers"})
+    public String buscarUsuario(String nome, HttpServletRequest req) {
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        List<Usuario> usuarios = serviceUser.buscarUsuariosComIdDiferenteAndNaoDesativada(nome.toLowerCase(), user.getId());
+        if (usuarios.isEmpty()) {
+            req.setAttribute("result", "Nenhum usuário encontrado com esse nome.");
+        }
+
         req.getSession().setAttribute("usuariosEncontrados", usuarios);
+
+        return "usersfind";
     }
 
     @RequestMapping("/otherUsers")
@@ -160,8 +180,9 @@ public class ControladorUser {
 
     private Usuario convertToUsuario(UsuarioForm u, LocalDate data) {
         Usuario usuario = new Usuario();
-
-        usuario.setDataDeNascimento(data);
+        if (data != null) {
+            usuario.setDataDeNascimento(data);
+        }
         usuario.setEmail(u.getEmail());
         usuario.setNome(u.getNome());
         usuario.setSenha(u.getSenha());
@@ -169,5 +190,21 @@ public class ControladorUser {
         usuario.setUsername(u.getUsername());
 
         return usuario;
+    }
+    
+    @RequestMapping("/editProfile")
+    public String editarPerfil(){
+        return "editProfile";
+    }
+    
+    @RequestMapping("/following")
+    public String seguindo(){
+        return "following";
+    }
+    
+    private void atualizaUsuario(Usuario user, Usuario usuarioNovo){
+        user.setNome(usuarioNovo.getNome());
+        user.setSobrenome(usuarioNovo.getSobrenome());
+        user.setSenha(usuarioNovo.getSenha());
     }
 }

@@ -8,6 +8,7 @@ package dijalmasilva.core.service;
 import dijalmasilva.core.repository.UsuarioDao;
 import dijalmasilva.entidades.Usuario;
 import java.util.List;
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -67,6 +68,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario user = dao.findOne(id);
         Usuario friend = dao.findOne(amigo);
         user.addAmigo(friend);
+        dao.save(friend);
         return dao.save(user);
     }
 
@@ -75,6 +77,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario user = dao.findOne(id);
         Usuario friend = dao.findOne(amigo);
         user.removeAmigo(friend);
+        dao.save(friend);
         return dao.save(user);
     }
 
@@ -111,6 +114,18 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         return usuarios;
+    }
+
+    @Override
+    public boolean isFollow(Long id, Long seguindo) {
+        Usuario user = dao.findOne(id);
+        return user.isFollowing(seguindo);
+    }
+
+    @Override
+    public List<Usuario> buscarUsuariosComIdDiferenteAndNaoDesativada(String nome, Long id) {
+        List<Usuario> usuariosEncontrados = dao.findByUsernameContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
+        return usuariosEncontrados;
     }
 
 }

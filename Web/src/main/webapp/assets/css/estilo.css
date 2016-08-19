@@ -14,7 +14,8 @@ and open the template in the editor.
 }
 
 body {
-    color: white;
+    color: black;
+    height: 100%;
 }
 
 .form-control-sm {
@@ -32,16 +33,15 @@ header {
 }
 
 .imgPerfil {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    padding: 10px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    cursor: pointer
 }
 
 .imgCadastro{
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
+    max-height: 110px;
+    width: auto;
     margin: 4px;
 }
 
@@ -53,7 +53,7 @@ header {
 
 .functionsUser {
     text-align: center;
-    background: #ffb74d;
+    background: #eceff1;
     padding: 10px;
     width: 20%;
     height: 570px;
@@ -63,9 +63,10 @@ header {
     text-align: center;
     top: 20px;
     width: 80%;
-    height: 700px;
+    height: auto;
+    position: absolute;
     overflow-y: auto;
-    position: fixed;
+    overflow-x: hidden;
     float: right;
     right: 0px;
     margin-top: 80px !important;
@@ -80,16 +81,21 @@ header {
     position: fixed;
     width: 100%;
     bottom: 40px;
+    -webkit-animation-delay: 3s;
+    z-index: -1;
 }
 
 .modal-notification {
     background: #F3F3F3;
     margin: 0 auto;
-    width: 400px;
-    padding: 8px;
-    box-shadow: 0px 0px 6px -1px #000;
-    border-radius: 5px;
+    width: 360px;
+    min-height: 80px;
+    box-shadow: 0px 5px 20px -2px #000;
     text-align: center;
+}
+
+.modal-notification h4 {
+    padding: 2px;
 }
 
 .invisible {
@@ -97,7 +103,7 @@ header {
 }
 
 .background-gradient {
-    background: linear-gradient(to right, #ff9800 , #ffa726);
+    background: linear-gradient(to right, #607d8b , #546e7a);
 }
 
 #modal-login {
@@ -147,4 +153,141 @@ form div {
     width: 60%;
     margin: 0 auto;
     background: #F3F3F3;
+}
+
+.imgVisit{
+    margin-top: 20px;
+    width: auto;
+    cursor: pointer;
+    height: 200px;
+}
+
+.modal_confirmacao{
+    width: 450px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.modal-imagem {
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+}
+
+#xclose-image {
+    position: absolute;
+    z-index: 1041;
+    top: 20px;
+    right: 20px;
+}
+
+#fotoSelecionada{
+    height: 550px;
+    width: auto;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.modal-body-imagem{
+    margin-top: 50px;
+    background: #000;
+    opacity: 0.9;
+}
+
+.modal-center {
+    margin: 0 auto;
+}
+
+.aside-responsivo {
+    position: fixed;
+    border-radius: 50%;
+    background: #546e7a;
+    width: 65px;
+    height: 65px;
+    bottom: 20px;
+    right: 10px;
+    box-shadow: 0 0 10px -1px #000;
+    display: none;
+    z-index: 2;
+}
+
+.aside-responsivo:hover {
+    box-shadow: 0 0 10px 1px #000;
+    cursor: pointer;
+    transition-duration: 0.8s;
+}
+
+.aside-responsivo img {
+    position: relative;
+    top: 15px;
+    width: 35px;
+}
+
+.aside-lateral {
+    text-align: center;
+    position: fixed;
+    left: 0px;
+    background: #eceff1;
+    z-index: 1050;
+    width: 250px;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+.modal-dark {
+    opacity: 0.9;
+}
+
+@media(max-width:1024px){
+    #fotoSelecionada {
+        height: 500px;
+    }
+}
+
+@media(max-width:900px){
+    .functionsUser{
+        display: none;
+    }
+
+    .aside-responsivo {
+        display: block;
+    }
+    
+    .conteudo {
+        width: 100%;
+    }
+}
+
+@media(max-width:840px){
+    #fotoSelecionada {
+        max-height: 400px;
+    }
+}
+
+@media(max-width:755px){
+    #fotoSelecionada {
+        max-height: 300px;
+    }
+}
+
+@media(max-width:615px){
+    #xclose-image img{
+        width: 15px;
+    }
+
+    #fotoSelecionada {
+        max-height: 220px;
+    }
+}
+
+@media(max-width:455px){
+    #fotoSelecionada {
+        max-height: 200px;
+    }
+}
+
+@media(max-width:355px){
+    #fotoSelecionada {
+        max-height: 140px;
+    }
 }

@@ -12,27 +12,11 @@
         <%@include file="header.jsp" %>
         <%@include file="asideUser.jsp" %>
         <aside class="conteudo">
-            <c:if test="${usuariosEncontrados.isEmpty() == false}">
-                <h2>Usuários Encontrados</h2>
-                <br><br><br>
-                <div class="row">
-                    <c:forEach items="${usuariosEncontrados}" var="usuario">
-                        <div class="col-lg-4 col-sm-4 col-xs-2">
-                            <c:if test="${usuario.foto == null}">
-                                <img src="/assets/imagens/boy.svg" alt="${usuario.nome}" class="imgPerfil">
-                            </c:if>
-                            <c:if test="${usuario.foto != null}">
-                                <img src="/user/image/${usuario.id}" alt="${usuario.nome}" class="imgPerfil">
-                            </c:if>
-                            <h4><a href="/user/otherUser/${usuario.id}">${usuario.nome} ${usuario.sobrenome}</a></h4>
-                        </div>
-                    </c:forEach>
-                </div>
-            </c:if>
-            <c:if test="${usuariosEncontrados == null}">
-                <h3>Ninguém foi encontrado</h3>
-            </c:if>
+            <h3>Feed</h3>
         </aside>
-        <%@include file="notification.jsp" %>
+        <c:if test="${result != null}">
+            <%@include file="notification.jsp" %>
+        </c:if>
+        <%@include file="modalImagem.jsp" %>
     </body>
 </html>
