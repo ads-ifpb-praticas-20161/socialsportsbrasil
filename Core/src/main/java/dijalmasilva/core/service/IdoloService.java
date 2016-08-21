@@ -6,6 +6,7 @@
 package dijalmasilva.core.service;
 
 import dijalmasilva.entidades.Idolo;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,4 +25,6 @@ public interface IdoloService {
     void remover(Long id);
     
     Idolo buscar(Long id);
+    
+    List<Idolo> buscarPorNome(String nome);
 }

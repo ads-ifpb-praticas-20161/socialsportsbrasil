@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+eventFinish = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+notification = true;
 
 $(document).ready(function () {
     $('.aside-lateral').css({
@@ -18,6 +19,18 @@ $(document).ready(function () {
 
     $('.aside-responsivo').click(function () {
         $('#modalLateral').removeClass('invisible');
+    });
+
+    $('.modal-notification').one(eventFinish, function () {
+        if (notification) {
+            $(this).removeClass("animated fadeInUp");
+            setTimeout(function () {
+                $('.modal-notification').addClass("animated fadeOutUp");
+            }, '3000');
+            notification = false;
+        } else {
+            notification = true;
+        }
     });
 });
 
@@ -53,7 +66,7 @@ function desativarConta() {
     $('#modalConfirmacao').removeClass('invisible');
 }
 
-function desativarContaInMobile(){
+function desativarContaInMobile() {
     fecharBackdrop();
     $('#modalConfirmacao').removeClass('invisible');
 }
@@ -67,6 +80,33 @@ function abrirImagemDoUsuario(id) {
     $('#modalImagem').removeClass("invisible");
 }
 
-function abrirNovoIdolo(){
+function abrirNovoIdolo() {
     $('#modal-newIdolo').removeClass("invisible");
+}
+
+function buscarIdolosPorNome() {
+    var nome = $('#inputIdolos').val();
+    console.log(nome);
+    $.ajax({
+        url: "/idolo/" + nome,
+        context: document.body,
+        success: function (data) {
+            resultBuscaPorIdolos(data);
+        }
+    });
+}
+
+function resultBuscaPorIdolos(data) {
+    $('#idolos').empty();
+    $('#idolos').append(data);
+}
+
+function alterarImagemJogador() {
+    var data = {};
+    $("#idolos option").each(function (i, el) {
+        data[$(el).data("value")] = $(el).val();
+    });
+    var inputIdolo = $('#inputIdolos').val();
+    var id = $('#idolos [value="' + inputIdolo + '"]').data('value');
+    $('#imagemIdolo').attr('src', "/user/image/"+id);
 }
