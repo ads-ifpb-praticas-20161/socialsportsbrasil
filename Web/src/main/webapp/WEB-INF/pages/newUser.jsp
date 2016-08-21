@@ -26,7 +26,7 @@
                     <input type="text" class="form-control" name="nome" required="" placeholder="Nome"/>
                 </div>
                 <div class="form-group-lg">
-                    <input type="text" class="form-control" name="sobrenome" required="" placeholder="Sobrenome"/>
+                    <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome"/>
                 </div>
                 <div class="form-group-lg">
                     <input type="text" class="form-control" name="username" required="" placeholder="Username"/>

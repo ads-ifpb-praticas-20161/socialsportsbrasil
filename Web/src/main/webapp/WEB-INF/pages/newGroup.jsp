@@ -20,8 +20,8 @@
                 </div>
                 <div class="form-group-lg form-inline">
                     <a href="#" onclick="abrirNovoIdolo()"><img src="/assets/imagens/add.svg" id="novoIdolo"/></a>
-                    <input type="text" class="form-control" name="idolo" required="" placeholder="Ídolo" list="idolos" id="inputIdolos" onkeydown="buscarIdolosPorNome()" onclick="alterarImagemJogador()"/>
-                    <datalist id="idolos"></datalist>
+                    <input type="text" class="form-control" name="idolo" required="" placeholder="Ídolo" list="idolos" id="inputIdolos" onkeyup="buscarIdolosPorNome()"/>
+                    <datalist id="idolos" onselect="alterarImagemJogador()"></datalist>
                 </div>
                 <hr>
                 <br>

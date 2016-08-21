@@ -81,7 +81,7 @@ public class ControladorUser {
                     + "\n Faça login e aproveite!");
         }
 
-        return "redirect:/home";
+        return "/index";
     }
 
     @RequestMapping("/disable/{id}")
@@ -141,7 +141,7 @@ public class ControladorUser {
     @RequestMapping(value = {"/searchUsers"})
     public String buscarUsuario(String nome, HttpServletRequest req) {
         Usuario user = (Usuario) req.getSession().getAttribute("user");
-        List<Usuario> usuarios = serviceUser.buscarUsuariosComIdDiferenteAndNaoDesativada(nome.toLowerCase(), user.getId());
+        List<Usuario> usuarios = serviceUser.buscarUsuariosComIdDiferenteAndNaoDesativada(nome, user.getId());
         if (usuarios.isEmpty()) {
             req.setAttribute("result", "Nenhum usuário encontrado com esse nome.");
         }

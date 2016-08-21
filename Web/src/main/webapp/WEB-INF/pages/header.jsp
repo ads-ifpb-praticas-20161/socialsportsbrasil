@@ -43,7 +43,7 @@
                 </div>
             </form>
             <br>
-            <a href="#">Ver Grupos (${user.qtdeGrupos()})</a>
+            <a href="#">Grupos (${user.qtdeGrupos()})</a>
             <br><br>
             <div class="form-group-sm">
                 <input type="text" class="form-control" placeholder="Buscar grupos" />
@@ -56,7 +56,7 @@
             </div>
             <br>
             <div>
-                <label>Segurança</label>
+                <label>Configurações</label>
                 <br><br>
                 <div class="text-left">
                     <a href="/user/editProfile">Editar Perfil</a>

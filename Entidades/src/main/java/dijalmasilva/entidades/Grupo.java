@@ -63,6 +63,14 @@ public class Grupo implements Serializable {
         this.nome = nome;
     }
 
+    public void setDono(Usuario dono){
+        this.dono = dono;
+    }
+    
+    public void setIdolo(Idolo idolo){
+        this.idolo = idolo;
+    }
+    
     public Idolo getIdolo() {
         return idolo;
     }

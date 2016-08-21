@@ -12,10 +12,12 @@ import java.io.IOException;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,19 +51,21 @@ public class ControladorIdolo {
         return "newGroup";
     }
     
-    @RequestMapping("/{nome}")
-    public @ResponseBody String buscarIdolosPorNome(@PathVariable String nome, HttpServletRequest req){
+    @RequestMapping(value = "/{nome}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<List<Idolo>> buscarIdolosPorNome(@PathVariable String nome){
         
         List<Idolo> idolos = serviceIdolo.buscarPorNome(nome);
-        req.setAttribute("idolos", idolos);
         
-        String result = "";
         
-        for (Idolo idolo : idolos) {
-            result += "<option data-value=" + idolo.getId() + " value="+idolo.getNome()+"/>\n";
-        }
-        System.out.println(result);
-        return result;
+//        String result = "";
+//        
+//        for (Idolo idolo : idolos) {
+//            result += "<option data-value=" + idolo.getId() + " value="+idolo.getNome()+"/>\n";
+//        }
+//        System.out.println(result);
+        
+        
+        return ResponseEntity.accepted().body(idolos);
     }
     
     private Idolo convertToIdolo(IdoloForm i){

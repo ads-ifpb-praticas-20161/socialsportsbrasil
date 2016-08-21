@@ -32,18 +32,11 @@ $(document).ready(function () {
             notification = true;
         }
     });
-});
 
-function buscaUsuarios() {
-    nome = $('#nomeUsuario').val();
-    console.log(nome);
-    $.ajax({
-        url: "/user/search/" + nome + "",
-        success: function (result) {
-            console.log("Deu certo - " + result);
-        }
+    $("#inputIdolos").on('input', function () {
+        alterarImagemJogador();
     });
-}
+});
 
 function escolherFoto() {
     $('#inputImagem').trigger('click');
@@ -86,19 +79,24 @@ function abrirNovoIdolo() {
 
 function buscarIdolosPorNome() {
     var nome = $('#inputIdolos').val();
-    console.log(nome);
     $.ajax({
         url: "/idolo/" + nome,
         context: document.body,
         success: function (data) {
+
             resultBuscaPorIdolos(data);
         }
     });
 }
 
 function resultBuscaPorIdolos(data) {
+    idolosEncontrados = data;
+    list = "";
+    $.each(idolosEncontrados, function (index, value) {
+        list += "<option data-value=" + value.id + " value=" + value.nome + "/>\n";
+    });
     $('#idolos').empty();
-    $('#idolos').append(data);
+    $('#idolos').append(list);
 }
 
 function alterarImagemJogador() {
@@ -108,5 +106,14 @@ function alterarImagemJogador() {
     });
     var inputIdolo = $('#inputIdolos').val();
     var id = $('#idolos [value="' + inputIdolo + '"]').data('value');
-    $('#imagemIdolo').attr('src', "/user/image/"+id);
+    if (id > 0) {
+        $.each(idolosEncontrados, function (index, value) {
+            if (value.id === id) {
+                caminho = "data:image/png;base64," + value.foto;
+            }
+        });
+        $('#imagemIdolo').attr('src', caminho);
+    } else {
+        $('#imagemIdolo').attr('src', "/assets/imagens/stars.png");
+    }
 }

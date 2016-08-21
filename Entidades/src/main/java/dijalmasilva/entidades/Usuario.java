@@ -45,7 +45,7 @@ public class Usuario implements Serializable {
     private byte[] foto;
     private int pontos;
 
-    @OneToMany(mappedBy = "dono")
+    @OneToMany
     private List<Grupo> grupos;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -177,6 +177,9 @@ public class Usuario implements Serializable {
     }
     
     public int qtdeGrupos(){
+        if (grupos == null){
+            this.grupos = new ArrayList<>();
+        }
         return this.grupos.size();
     }
     

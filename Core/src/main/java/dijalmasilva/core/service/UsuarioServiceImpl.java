@@ -5,18 +5,19 @@
  */
 package dijalmasilva.core.service;
 
-import dijalmasilva.core.repository.UsuarioDao;
 import dijalmasilva.entidades.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
+import dijalmasilva.core.repository.UsuarioRepository;
 
 @Named
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Inject
-    private UsuarioDao dao;
+    private UsuarioRepository dao;
 
     @Override
     public Usuario login(String emailOuUsername, String password) {
@@ -47,7 +48,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario salvarUsuario(Usuario u) {
-        System.out.println(u.getEmail());
         return dao.save(u);
     }
 
@@ -124,7 +124,50 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public List<Usuario> buscarUsuariosComIdDiferenteAndNaoDesativada(String nome, Long id) {
-        List<Usuario> usuariosEncontrados = dao.findByUsernameContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
+        List<Usuario> usuariosEncontrados;
+        String[] nomes = nome.split(" ");
+        List<Usuario> usuariosEncontradosPorNome;
+        List<Usuario> usuariosEncontradosSobrenome;
+        if (nomes != null && nomes.length > 1) {
+            System.out.println("Buscando por " + nomes[0]);
+            usuariosEncontradosPorNome = dao.findByNomeContainingAndIdNotAndContaNotLike(nomes[0], id, "Desativada");
+            System.out.println("------------------------------");
+            System.out.println("Encontrou " + usuariosEncontradosPorNome.size() + " usuários");
+            System.out.println("------------------------------");
+            System.out.println("Buscando por " + nomes[1]);
+            usuariosEncontradosSobrenome = dao.findBySobrenomeContainingAndIdNotAndContaNotLike(nomes[1], id, "Desativada");
+            System.out.println("------------------------------");
+            System.out.println("Encontrou " + usuariosEncontradosSobrenome.size() + " usuários");
+            System.out.println("------------------------------");
+
+        } else {
+            System.out.println("Buscando por " + nome + " em nome");
+            usuariosEncontradosPorNome = dao.findByNomeContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
+            System.out.println("------------------------------");
+            System.out.println("Encontrou " + usuariosEncontradosPorNome.size() + " usuários");
+            System.out.println("------------------------------");
+            System.out.println("Buscando por " + nome + " em sobrenome");
+            usuariosEncontradosSobrenome = dao.findBySobrenomeContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
+            System.out.println("------------------------------");
+            System.out.println("Encontrou " + usuariosEncontradosSobrenome.size() + " usuários");
+            System.out.println("------------------------------");
+        }
+
+        usuariosEncontrados = usuariosEncontradosPorNome;
+
+        for (Usuario u1 : usuariosEncontrados) {
+            for (Usuario u2 : usuariosEncontradosSobrenome) {
+                if (!Objects.equals(u1.getId(), u2.getId())) {
+                    System.out.println("------------------------");
+                    usuariosEncontrados.add(u2);
+                    System.out.println("Adicionando " + u2.getNome() + u2.getSobrenome());
+                    System.out.println("------------------------");
+                }
+            }
+            
+            System.out.println(u1.getNome() + " " + u1.getSobrenome());
+        }
+        
         return usuariosEncontrados;
     }
 
