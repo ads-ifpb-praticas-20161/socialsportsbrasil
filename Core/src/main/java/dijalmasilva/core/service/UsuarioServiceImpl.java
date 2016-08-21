@@ -129,46 +129,33 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<Usuario> usuariosEncontradosPorNome;
         List<Usuario> usuariosEncontradosSobrenome;
         if (nomes != null && nomes.length > 1) {
-            System.out.println("Buscando por " + nomes[0]);
             usuariosEncontradosPorNome = dao.findByNomeContainingAndIdNotAndContaNotLike(nomes[0], id, "Desativada");
-            System.out.println("------------------------------");
-            System.out.println("Encontrou " + usuariosEncontradosPorNome.size() + " usuários");
-            System.out.println("------------------------------");
-            System.out.println("Buscando por " + nomes[1]);
             usuariosEncontradosSobrenome = dao.findBySobrenomeContainingAndIdNotAndContaNotLike(nomes[1], id, "Desativada");
-            System.out.println("------------------------------");
-            System.out.println("Encontrou " + usuariosEncontradosSobrenome.size() + " usuários");
-            System.out.println("------------------------------");
 
         } else {
-            System.out.println("Buscando por " + nome + " em nome");
             usuariosEncontradosPorNome = dao.findByNomeContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
-            System.out.println("------------------------------");
-            System.out.println("Encontrou " + usuariosEncontradosPorNome.size() + " usuários");
-            System.out.println("------------------------------");
-            System.out.println("Buscando por " + nome + " em sobrenome");
             usuariosEncontradosSobrenome = dao.findBySobrenomeContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
-            System.out.println("------------------------------");
-            System.out.println("Encontrou " + usuariosEncontradosSobrenome.size() + " usuários");
-            System.out.println("------------------------------");
         }
 
         usuariosEncontrados = usuariosEncontradosPorNome;
 
-        for (Usuario u1 : usuariosEncontrados) {
-            for (Usuario u2 : usuariosEncontradosSobrenome) {
-                if (!Objects.equals(u1.getId(), u2.getId())) {
-                    System.out.println("------------------------");
-                    usuariosEncontrados.add(u2);
-                    System.out.println("Adicionando " + u2.getNome() + u2.getSobrenome());
-                    System.out.println("------------------------");
-                }
+        for (Usuario u : usuariosEncontradosSobrenome) {
+            if (!isContido(u, usuariosEncontrados)) {
+                usuariosEncontrados.add(u);
             }
-            
-            System.out.println(u1.getNome() + " " + u1.getSobrenome());
         }
-        
+
         return usuariosEncontrados;
     }
 
+    private boolean isContido(Usuario u, List<Usuario> usuarios) {
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.equals(u)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
