@@ -26,5 +26,7 @@ public interface IdoloService {
     
     Idolo buscar(Long id);
     
+    Idolo buscar(String nome);
+    
     List<Idolo> buscarPorNome(String nome);
 }

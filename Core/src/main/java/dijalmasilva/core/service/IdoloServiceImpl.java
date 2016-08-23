@@ -46,5 +46,10 @@ public class IdoloServiceImpl implements IdoloService {
     public List<Idolo> buscarPorNome(String nome) {
         return dao.findByNomeContaining(nome);
     }
+
+    @Override
+    public Idolo buscar(String nome) {
+        return dao.findByNome(nome);
+    }
     
 }

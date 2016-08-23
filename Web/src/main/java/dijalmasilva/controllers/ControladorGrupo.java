@@ -23,39 +23,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/group")
 public class ControladorGrupo {
-    
+
     @Inject
     private GrupoService serviceGrupo;
     @Inject
     private IdoloService serviceIdolo;
-    
+
     @RequestMapping("/new")
-    public String newGroup(){
+    public String newGroup() {
         return "newGroup";
     }
-    
+
     @RequestMapping("/save")
-    public String save(GrupoForm g, Long idolo, HttpServletRequest req){
+    public String save(GrupoForm g, String idolo, HttpServletRequest req) {
         Usuario user = (Usuario) req.getSession().getAttribute("user");
         Idolo idol = serviceIdolo.buscar(idolo);
-        Grupo grupo = convertToGrupo(g);
-        grupo.setIdolo(idol);
-        grupo = serviceGrupo.salvar(user, grupo);
-        
-        if (grupo != null){
-            req.setAttribute("result", "Grupo cadastrado com sucesso!");
-        }else{
-            req.setAttribute("result", "Não foi possível cadastrar grupo.!");
+        if (idol == null) {
+            req.setAttribute("result", "Idolo não cadastrado.");
+        } else {
+            Grupo grupo = convertToGrupo(g);
+            grupo.setIdolo(idol);
+            grupo = serviceGrupo.salvar(user, grupo);
+
+            if (grupo != null) {
+                req.setAttribute("result", "Grupo cadastrado com sucesso!");
+            } else {
+                req.setAttribute("result", "Não foi possível cadastrar grupo.!");
+            }
         }
-        return "/user/home";
+        return "/group/new";
     }
-    
-    private Grupo convertToGrupo(GrupoForm g){
+
+    private Grupo convertToGrupo(GrupoForm g) {
         Grupo grupo = new Grupo();
-        
+
         grupo.setDescricao(g.getDescricao());
         grupo.setNome(g.getDescricao());
-        
+
         return grupo;
     }
 }

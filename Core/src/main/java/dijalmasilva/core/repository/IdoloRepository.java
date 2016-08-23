@@ -18,4 +18,6 @@ import org.springframework.stereotype.Repository;
 public interface IdoloRepository extends CrudRepository<Idolo, Long>{
  
     List<Idolo> findByNomeContaining(String nome);
+    
+    Idolo findByNome(String nome);
 }
