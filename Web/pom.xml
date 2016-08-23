@@ -74,5 +74,19 @@
                 </configuration>
             </plugin>
         </plugins>
+        
     </build>
+    <profiles>
+        <profile>
+    <id>release</id>
+    <distributionManagement>
+        <repository>
+            <id>bintray-ads-ifpb-praticas-maven</id>
+            <name>ads-ifpb-praticas-maven</name>
+            <url>https://api.bintray.com/maven/ads-ifpb-praticas/maven/[NOME_DO_PROJETO]/;publish=1</url>
+        </repository>
+    </distributionManagement>
+</profile>
+    </profiles>
+    
 </project>

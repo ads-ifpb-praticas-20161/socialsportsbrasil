@@ -4,9 +4,6 @@
     Author     : dijalma
 --%>
 
-<div id="notification" class="animated bounceOutDown">
-    <div class="modal-notification">
-        <h4><b>Notificação</b></h4>
-        <h4>${result}</h4>
-    </div>
+<div class="modal-notification animated fadeInUp">
+    <h4>${result}</h4>
 </div>

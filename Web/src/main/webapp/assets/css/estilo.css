@@ -77,25 +77,29 @@ header {
     top: -30px;
 }
 
-#notification {
-    position: fixed;
-    width: 100%;
-    bottom: 40px;
-    -webkit-animation-delay: 3s;
-    z-index: -1;
-}
-
 .modal-notification {
-    background: #F3F3F3;
+    color: white;
+    position: absolute;
+    top: 120px;
+    right: 50px;
+    background: #323232;
     margin: 0 auto;
-    width: 360px;
-    min-height: 80px;
-    box-shadow: 0px 5px 20px -2px #000;
+    min-width: 50px;
+    max-width: 300px;
+    height: auto;
+    box-shadow: 0px 0px 10px -1px #000;
     text-align: center;
+    z-index: 1050;
 }
 
-.modal-notification h4 {
-    padding: 2px;
+.modal-notification:hover{
+    opacity: 0.9;
+}
+
+.modal-notification h4{
+    padding: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .invisible {
@@ -181,6 +185,10 @@ form div {
     right: 20px;
 }
 
+#xclose-image img:hover{
+    padding: 2px;
+}
+
 #fotoSelecionada{
     height: 550px;
     width: auto;
@@ -236,6 +244,19 @@ form div {
 
 .modal-dark {
     opacity: 0.9;
+}
+
+#novoIdolo{
+    padding: 5px;
+    background: #5cb85c;
+    border: 1px solid #4cae4c;;
+    border-radius: 4px;
+    width: 45px;
+    height: 45px;
+}
+
+#novoIdolo:hover{
+    background: #449D44;
 }
 
 @media(max-width:1024px){

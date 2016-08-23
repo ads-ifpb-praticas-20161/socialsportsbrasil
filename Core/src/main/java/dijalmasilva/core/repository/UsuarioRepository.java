@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author dijalma
  */
 @Repository
-public interface UsuarioDao extends CrudRepository<Usuario, Long>{
+public interface UsuarioRepository extends CrudRepository<Usuario, Long>{
 
     public Usuario findByEmail(String email);
     
@@ -25,5 +25,7 @@ public interface UsuarioDao extends CrudRepository<Usuario, Long>{
     
     public List<Usuario> findByUsernameContaining(String username);
     
-    public List<Usuario> findByUsernameContainingAndIdNotAndContaNotLike(String username, Long id, String conta);
+    public List<Usuario> findByNomeContainingAndIdNotAndContaNotLike(String nome, Long id, String conta);
+    
+    public List<Usuario> findBySobrenomeContainingAndIdNotAndContaNotLike(String sobrenome, Long id, String conta);
 }

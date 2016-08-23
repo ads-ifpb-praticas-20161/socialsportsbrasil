@@ -10,11 +10,13 @@ import dijalmasilva.enums.TipoIdolo;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -35,7 +37,8 @@ public class Idolo implements Serializable {
     private Esporte esporte;
     @Column(unique = true)
     private String nome;
-
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] foto;
     @OneToMany(mappedBy = "idolo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Resultado> resultados;
 
@@ -85,6 +88,14 @@ public class Idolo implements Serializable {
 
     public void removeResultado(Resultado r) {
         this.resultados.remove(r);
+    }
+    
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 
     @Override

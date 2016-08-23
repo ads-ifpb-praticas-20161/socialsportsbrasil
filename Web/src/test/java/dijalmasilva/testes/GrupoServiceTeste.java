@@ -49,18 +49,18 @@ public class GrupoServiceTeste {
 
 //    @Test
     public void testeSalvarGrupo() {
-        Usuario dono = serviceUsuario.findById(9L);
-        Idolo idolo = new Idolo();
-        idolo.setEsporte(Esporte.BASQUETE);
-        idolo.setTipo(TipoIdolo.JOGADOR);
-        idolo.setNome("Michael Jordan");
-        idolo.setResultados(new ArrayList<Resultado>());
-        Grupo esperado = new Grupo(dono, idolo);
-        esperado.setNome("O basquete de Jordan");
-        esperado.setDescricao("OIjasdoijasodijaosdjioasjdoiasjdoijasdoijasoidjsaoi");
-        Grupo resultado = service.salvar(esperado);
-
-        assertEquals(esperado.getNome(), resultado.getNome());
+//        Usuario dono = serviceUsuario.findById(9L);
+//        Idolo idolo = new Idolo();
+//        idolo.setEsporte(Esporte.BASQUETE);
+//        idolo.setTipo(TipoIdolo.JOGADOR);
+//        idolo.setNome("Michael Jordan");
+//        idolo.setResultados(new ArrayList<Resultado>());
+//        Grupo esperado = new Grupo(dono, idolo);
+//        esperado.setNome("O basquete de Jordan");
+//        esperado.setDescricao("OIjasdoijasodijaosdjioasjdoiasjdoijasdoijasoidjsaoi");
+//        Grupo resultado = service.salvar(esperado);
+//
+//        assertEquals(esperado.getNome(), resultado.getNome());
     }
     
 //    @Test
@@ -71,10 +71,10 @@ public class GrupoServiceTeste {
     
 //    @Test
     public void testeAtualizarGrupo(){
-        Grupo esperado = service.buscar(10L);
-        esperado.setDescricao("Novo basquete Brasil");
-        Grupo resultado = service.salvar(esperado);
-        
-        assertEquals(esperado.getDescricao(), resultado.getDescricao());
+//        Grupo esperado = service.buscar(10L);
+//        esperado.setDescricao("Novo basquete Brasil");
+//        Grupo resultado = service.salvar(esperado);
+//        
+//        assertEquals(esperado.getDescricao(), resultado.getDescricao());
     }
 }
