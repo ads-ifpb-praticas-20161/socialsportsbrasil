@@ -6,7 +6,9 @@
 package dijalmasilva.core.service;
 
 import dijalmasilva.core.repository.GrupoRepository;
+import dijalmasilva.core.repository.UsuarioRepository;
 import dijalmasilva.entidades.Grupo;
+import dijalmasilva.entidades.Usuario;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,10 +17,17 @@ public class GrupoServiceImpl implements GrupoService {
 
     @Inject
     private GrupoRepository dao;
+    @Inject 
+    private UsuarioRepository daoUsuario;
     
     @Override
-    public Grupo salvar(Grupo g) {
-        return dao.save(g);
+    public Grupo salvar(Usuario u, Grupo g) {
+        u.addGrupo(g);
+        g.setDono(u);
+        Grupo grupo = dao.save(g);
+        daoUsuario.save(u);
+        
+        return grupo;
     }
 
     @Override
@@ -27,7 +36,9 @@ public class GrupoServiceImpl implements GrupoService {
     }
 
     @Override
-    public void remover(Grupo g) {
+    public void remover(Usuario u, Grupo g) {
+        u.removeGrupo(g);
+        daoUsuario.save(u);
         dao.delete(g);
     }
 

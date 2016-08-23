@@ -26,7 +26,7 @@
                     <input type="text" class="form-control" name="nome" required="" placeholder="Nome"/>
                 </div>
                 <div class="form-group-lg">
-                    <input type="text" class="form-control" name="sobrenome" required="" placeholder="Sobrenome"/>
+                    <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome"/>
                 </div>
                 <div class="form-group-lg">
                     <input type="text" class="form-control" name="username" required="" placeholder="Username"/>
@@ -43,7 +43,7 @@
 
                 <br>
                 <div>
-                    <input type="submit" class="btn btn-success form-control" value="Cadastrar-se" />
+                    <input type="submit" class="btn btn-success form-control" value="Cadastrar" />
                 </div>
                 <div>
                     <a href="home"><input type="button" class="btn btn-primary form-control" value="Voltar" /></a>

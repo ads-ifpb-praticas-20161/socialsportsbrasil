@@ -7,6 +7,7 @@ package dijalmasilva.core.service;
 
 import dijalmasilva.core.repository.IdoloRepository;
 import dijalmasilva.entidades.Idolo;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -39,6 +40,11 @@ public class IdoloServiceImpl implements IdoloService {
     @Override
     public Idolo buscar(Long id) {
         return dao.findOne(id);
+    }
+
+    @Override
+    public List<Idolo> buscarPorNome(String nome) {
+        return dao.findByNomeContaining(nome);
     }
     
 }

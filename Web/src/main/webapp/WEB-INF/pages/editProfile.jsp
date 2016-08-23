@@ -40,11 +40,7 @@
                     </div>
                     <div class="form-group-lg">
                         <label>Sobrenome:</label>
-                        <input type="text" class="form-control" name="sobrenome" required="" placeholder="Sobrenome" value="${user.sobrenome}"/>
-                    </div>
-                    <div class="form-group-lg">
-                        <label>Senha:</label>
-                        <input type="password" class="form-control" name="senha" required="" placeholder="Senha" value="${user.senha}"/>
+                        <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome" value="${user.sobrenome}"/>
                     </div>
                 </div>
                 <br>

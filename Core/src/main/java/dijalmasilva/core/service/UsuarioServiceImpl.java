@@ -5,18 +5,19 @@
  */
 package dijalmasilva.core.service;
 
-import dijalmasilva.core.repository.UsuarioDao;
 import dijalmasilva.entidades.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
+import dijalmasilva.core.repository.UsuarioRepository;
 
 @Named
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Inject
-    private UsuarioDao dao;
+    private UsuarioRepository dao;
 
     @Override
     public Usuario login(String emailOuUsername, String password) {
@@ -47,7 +48,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario salvarUsuario(Usuario u) {
-        System.out.println(u.getEmail());
         return dao.save(u);
     }
 
@@ -124,8 +124,38 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public List<Usuario> buscarUsuariosComIdDiferenteAndNaoDesativada(String nome, Long id) {
-        List<Usuario> usuariosEncontrados = dao.findByUsernameContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
+        List<Usuario> usuariosEncontrados;
+        String[] nomes = nome.split(" ");
+        List<Usuario> usuariosEncontradosPorNome;
+        List<Usuario> usuariosEncontradosSobrenome;
+        if (nomes != null && nomes.length > 1) {
+            usuariosEncontradosPorNome = dao.findByNomeContainingAndIdNotAndContaNotLike(nomes[0], id, "Desativada");
+            usuariosEncontradosSobrenome = dao.findBySobrenomeContainingAndIdNotAndContaNotLike(nomes[1], id, "Desativada");
+
+        } else {
+            usuariosEncontradosPorNome = dao.findByNomeContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
+            usuariosEncontradosSobrenome = dao.findBySobrenomeContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
+        }
+
+        usuariosEncontrados = usuariosEncontradosPorNome;
+
+        for (Usuario u : usuariosEncontradosSobrenome) {
+            if (!isContido(u, usuariosEncontrados)) {
+                usuariosEncontrados.add(u);
+            }
+        }
+
         return usuariosEncontrados;
     }
 
+    private boolean isContido(Usuario u, List<Usuario> usuarios) {
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.equals(u)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
