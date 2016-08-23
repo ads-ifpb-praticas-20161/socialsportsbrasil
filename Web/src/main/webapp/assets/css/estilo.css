@@ -259,6 +259,10 @@ form div {
     background: #449D44;
 }
 
+.linha-mais-escura{
+    border-top: 1px solid #e4dada;
+}
+
 @media(max-width:1024px){
     #fotoSelecionada {
         height: 500px;

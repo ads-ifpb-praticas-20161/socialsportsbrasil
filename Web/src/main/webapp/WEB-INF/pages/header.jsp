@@ -30,37 +30,40 @@
             <div class="text-right">
                 <a href="#" onclick="fecharBackdrop()"><img src="/assets/imagens/close-red.png" width="17"/></a>
             </div>
+            <br>
             <label>Pontos: ${user.pontos}</label>
             <br><br>
-            <a href="/user/following">Seguindo (${user.qtdeSeguindo()})</a>
-            <br><br>
-            <form action="/user/searchUsers" method="POST">
-                <div class="form-group-sm">
-                    <input type="text" class="form-control" placeholder="Buscar usuário" id="nomeUsuario" name="nome"/>
+            <div align="left">
+                <a href="/user/following">Seguindo (${user.qtdeSeguindo()})</a>
+                <form action="/user/searchUsers" method="POST">
+                    <div class="form-group-sm has-feedback">
+                        <input type="text" class="form-control" placeholder="Buscar usuário" id="nomeUsuario" name="nome"/>
+                        <span class="glyphicon form-control-feedback"><img src="/assets/imagens/icons/search-black.png" /></span>
+                    </div>
+                    <div class="text-right">
+                        <input type="submit" value="Buscar" class="btn btn-sm btn-default"/>
+                    </div>
+                </form>
+                <hr class="linha-mais-escura">
+                <a href="#">Grupos (${user.qtdeGrupos()})</a>
+                <div class="form-group-sm has-feedback">
+                    <input type="text" class="form-control" placeholder="Buscar grupos" />
+                    <span class="glyphicon form-control-feedback"><img src="/assets/imagens/icons/search-black.png" /></span>
                 </div>
                 <div class="text-right">
-                    <input type="submit" value="Buscar" class="btn btn-sm btn-default" onsubmit="buscaUsuarios()"/>
+                    <input type="submit" value="Buscar" class="btn btn-sm btn-default" />
                 </div>
-            </form>
-            <br>
-            <a href="#">Grupos (${user.qtdeGrupos()})</a>
-            <br><br>
-            <div class="form-group-sm">
-                <input type="text" class="form-control" placeholder="Buscar grupos" />
+                <div class="text-left">
+                    <a href="/group/new"><input type="button" value="Criar" class="btn btn-sm btn-default" id="criaGrupo"/></a>
+                </div>
             </div>
-            <div class="text-right">
-                <input type="submit" value="Buscar" class="btn btn-sm btn-default" />
-            </div>
-            <div class="text-left">
-                <a href="/group/new"><input type="button" value="Criar" class="btn btn-sm btn-default" id="criaGrupo"/></a>
-            </div>
-            <br>
+            <hr class="linha-mais-escura">
             <div>
                 <label>Configurações</label>
-                <br><br>
+                <br>
                 <div class="text-left">
                     <a href="/user/editProfile">Editar Perfil</a>
-                    <br><br>
+                    <br>
                     <a href="#" onclick="desativarContaInMobile()">Desativar Conta</a>
                 </div>
             </div>

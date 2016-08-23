@@ -119,7 +119,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public boolean isFollow(Long id, Long seguindo) {
         Usuario user = dao.findOne(id);
-        return user.isFollowing(seguindo);
+        return user.isFollowingUser(seguindo);
     }
 
     @Override

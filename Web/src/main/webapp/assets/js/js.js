@@ -36,6 +36,13 @@ $(document).ready(function () {
     $("#inputIdolos").on('input', function () {
         alterarImagemJogador();
     });
+
+    $("#inputIdolos").keyup(function (event) {
+        console.log(event.keyCode);
+        if ((event.keyCode < 37 || event.keyCode > 40) && (event.keyCode !== 16 && event.keyCode !== 17)) {
+            buscarIdolosPorNome();
+        }
+    });
 });
 
 function escolherFoto() {
@@ -79,14 +86,16 @@ function abrirNovoIdolo() {
 
 function buscarIdolosPorNome() {
     var nome = $('#inputIdolos').val();
-    $.ajax({
-        url: "/idolo/" + nome,
-        context: document.body,
-        success: function (data) {
+    if (nome !== "") {
+        $.ajax({
+            url: "/idolo/" + nome,
+            context: document.body,
+            success: function (data) {
 
-            resultBuscaPorIdolos(data);
-        }
-    });
+                resultBuscaPorIdolos(data);
+            }
+        });
+    }
 }
 
 function resultBuscaPorIdolos(data) {

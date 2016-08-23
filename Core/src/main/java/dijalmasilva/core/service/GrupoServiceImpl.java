@@ -22,9 +22,9 @@ public class GrupoServiceImpl implements GrupoService {
     
     @Override
     public Grupo salvar(Usuario u, Grupo g) {
-        u.addGrupo(g);
         g.setDono(u);
         Grupo grupo = dao.save(g);
+        u.addGrupo(grupo);
         daoUsuario.save(u);
         
         return grupo;

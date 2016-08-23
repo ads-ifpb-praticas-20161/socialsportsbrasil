@@ -10,6 +10,7 @@ import dijalmasilva.core.service.IdoloService;
 import dijalmasilva.entidades.Grupo;
 import dijalmasilva.entidades.Idolo;
 import dijalmasilva.entidades.Usuario;
+import dijalmasilva.form.GrupoForm;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -34,11 +35,12 @@ public class ControladorGrupo {
     }
     
     @RequestMapping("/save")
-    public String save(Grupo g, Long idolo, HttpServletRequest req){
+    public String save(GrupoForm g, Long idolo, HttpServletRequest req){
         Usuario user = (Usuario) req.getSession().getAttribute("user");
         Idolo idol = serviceIdolo.buscar(idolo);
-        g.setIdolo(idol);
-        Grupo grupo = serviceGrupo.salvar(user, g);
+        Grupo grupo = convertToGrupo(g);
+        grupo.setIdolo(idol);
+        grupo = serviceGrupo.salvar(user, grupo);
         
         if (grupo != null){
             req.setAttribute("result", "Grupo cadastrado com sucesso!");
@@ -46,5 +48,14 @@ public class ControladorGrupo {
             req.setAttribute("result", "Não foi possível cadastrar grupo.!");
         }
         return "/user/home";
+    }
+    
+    private Grupo convertToGrupo(GrupoForm g){
+        Grupo grupo = new Grupo();
+        
+        grupo.setDescricao(g.getDescricao());
+        grupo.setNome(g.getDescricao());
+        
+        return grupo;
     }
 }

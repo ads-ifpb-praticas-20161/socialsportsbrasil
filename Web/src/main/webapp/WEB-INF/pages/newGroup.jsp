@@ -12,31 +12,35 @@
     <body class="text-center background-gradient">
         <h1 style="color: white">Novo grupo</h1>
         <br>
-        <div class="modal-cadastro z-index-2">
-            <form class="form-group-sm" action="/group/new" method="POST" enctype="multipart/form-data">
-
-                <div class="form-horizontal text-center">
-                    <img src="/assets/imagens/stars.png" class="imgCadastro" alt="Imagem do ídolo ou equipe" id="imagemIdolo"/> 
-                </div>
-                <div class="form-group-lg form-inline">
-                    <a href="#" onclick="abrirNovoIdolo()"><img src="/assets/imagens/add.svg" id="novoIdolo"/></a>
-                    <input type="text" class="form-control" name="idolo" required="" placeholder="Ídolo" list="idolos" id="inputIdolos" onkeyup="buscarIdolosPorNome()"/>
-                    <datalist id="idolos" onselect="alterarImagemJogador()"></datalist>
-                </div>
-                <hr>
+        <div class="modal-cadastro z-index-2 text-left" style="padding: 10px;">
+            <form class="form-group-sm" action="/group/save" method="POST" enctype="multipart/form-data">
                 <br>
-                <div class="form-group-lg">
-                    <input type="text" class="form-control" name="nome" placeholder="Nome do grupo" />
-                </div>
-                <div class="form-group-lg">
+                <div class="form-group">
+                    <label class="control-label" for="nomegrupo">Nome do grupo</label>
+                    <input type="text" class="form-control" name="nome" placeholder="Nome do grupo" id="nomegrupo"/>
+                </div><hr>
+                <div class="form-group">
+                    <label class="control-label">Descrição</label>
                     <textarea class="form-control" style="resize: none" placeholder="Descrição" rows="3"></textarea>
                 </div>
+                <hr>
+                <label class="control-label">Escolha o ídolo do grupo</label>
+                <div align="left">
+                    <img src="/assets/imagens/stars.png" class="imgCadastro" alt="Imagem do ídolo ou equipe" id="imagemIdolo" align="center"/> 
+                </div>
+                <div class="form-group-lg has-feedback" id="modal-idolo">
+                    <input type="text" class="form-control" name="idolo" required="" placeholder="Buscar Ídolo" list="idolos" id="inputIdolos" autocomplete="off"/>
+                    <span class="form-control-feedback glyphicon" style="margin-top: 8px"><img src="/assets/imagens/icons/search-black.png"/></span>
+                    <datalist id="idolos" onselect="alterarImagemJogador()"></datalist>
+                </div>
+                <button type="button" class="btn btn-primary form-control" style="margin-top: 7px" onclick="abrirNovoIdolo()">Cadastrar novo ídolo</button>
+                <hr>
                 <br>
                 <div>
-                    <input type="submit" class="btn btn-success form-control" value="Cadastrar" />
+                    <input type="submit" class="btn btn-success form-control" value="Criar grupo" />
                 </div>
                 <div>
-                    <a href="/user/home"><input type="button" class="btn btn-primary form-control" value="Voltar" /></a>
+                    <a href="/user/home"><input type="button" class="btn btn-danger form-control" value="Cancelar"/></a>
                 </div>
             </form>
         </div>

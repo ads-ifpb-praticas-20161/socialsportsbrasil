@@ -20,11 +20,13 @@
                 <hr>
             </div>
             <form action="/user/login" method="POST">
-                <div class="form-group-lg">
+                <div class="form-group-lg has-feedback">
                     <input type="text" class="form-control" name="login" required="" placeholder="Nome de usuário"/>
+                    <span class="glyphicon form-control-feedback"><img src="/assets/imagens/icons/user-black.png" /></span>
                 </div>
-                <div class="form-group-lg">
+                <div class="form-group-lg has-feedback">
                     <input type="password" class="form-control" name="senha" required="" placeholder="Senha"/>
+                    <span class="glyphicon form-control-feedback"><img src="/assets/imagens/icons/lock-black.png" /></span>
                 </div>
                 <hr>
                 <div>

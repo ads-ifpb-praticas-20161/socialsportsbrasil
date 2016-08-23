@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group-lg">
                     <select name="esporte" class="form-control" required="">
-                        <option value="">Selecione o esporte</option>
+                        <option value="">Selecionar esporte</option>
                         <option value="ATLETISMO">Atletismo</option>
                         <option value="BASQUETE">Basquete</option>
                         <option value="BOXE">Boxe</option>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group-lg">
                     <select name="tipo" class="form-control">
-                        <option value="">Selecione o tipo do ídolo</option>
+                        <option value="">Selecionar tipo de ídolo</option>
                         <option value="ATLETA">Atleta</option>
                         <option value="CORREDOR">Corredor</option>
                         <option value="EQUIPE">Equipe</option>
@@ -55,7 +55,7 @@
                     <input type="submit" class="btn btn-success form-control" value="Cadastrar" />
                 </div>
                 <div>
-                    <input type="button" class="btn btn-danger form-control" value="Voltar" onclick="fecharBackdrop()"/>
+                    <input type="button" class="btn btn-danger form-control" value="Cancelar" onclick="fecharBackdrop()"/>
                 </div>
             </form>
         </div>

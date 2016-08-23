@@ -45,7 +45,7 @@ public class Usuario implements Serializable {
     private byte[] foto;
     private int pontos;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Grupo> grupos;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -183,7 +183,7 @@ public class Usuario implements Serializable {
         return this.grupos.size();
     }
     
-    public boolean isFollowing(Long seguindo) {
+    public boolean isFollowingUser(Long seguindo) {
         for (Usuario amigo : amigos) {
             if (Objects.equals(amigo.getId(), seguindo)) {
                 return true;

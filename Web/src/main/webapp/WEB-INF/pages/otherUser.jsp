@@ -24,10 +24,10 @@
             </div>
             <br><br><br><br>
             <div>
-                <c:if test="${user.isFollowing(outroUsuario.id) == false}">
+                <c:if test="${user.isFollowingUser(outroUsuario.id) == false}">
                     <a class="btn btn-lg btn-primary" href="/user/follow/${outroUsuario.id}">Seguir</a>
                 </c:if>
-                <c:if test="${user.isFollowing(outroUsuario.id) != false}">
+                <c:if test="${user.isFollowingUser(outroUsuario.id) != false}">
                     <a class="btn btn-lg btn-danger" href="/user/unfollow/${outroUsuario.id}">Deixar de seguir</a>
                 </c:if>
             </div>
