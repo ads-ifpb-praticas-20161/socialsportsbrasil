@@ -51,7 +51,7 @@ public class ControladorGrupo {
                 req.setAttribute("result", "Não foi possível cadastrar grupo.!");
             }
         }
-        return "/group/new";
+        return "group/new";
     }
 
     private Grupo convertToGrupo(GrupoForm g) {

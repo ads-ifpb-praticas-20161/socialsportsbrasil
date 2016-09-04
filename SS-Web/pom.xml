@@ -7,10 +7,10 @@
         <groupId>dijalmasilva</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>Web</artifactId>
+    <artifactId>SS-Web</artifactId>
     <groupId>dijalmasilva</groupId>
     <packaging>war</packaging>
-    <name>Web</name>
+    <name>SS-Web</name>
     <description>Spring Boot Web JSP Sample</description>
     <version>1.0-SNAPSHOT</version>
     <properties>

@@ -102,7 +102,7 @@ function resultBuscaPorIdolos(data) {
     idolosEncontrados = data;
     list = "";
     $.each(idolosEncontrados, function (index, value) {
-        list += "<option data-value=" + value.id + " value=" + value.nome + "/>\n";
+        list += "<option data-value=" + value.id + " value='" + value.nome +"'/>";
     });
     $('#idolos').empty();
     $('#idolos').append(list);
