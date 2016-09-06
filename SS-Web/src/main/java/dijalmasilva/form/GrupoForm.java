@@ -14,6 +14,14 @@ public class GrupoForm {
     private String nome;
     private String descricao;
 
+    public GrupoForm() {
+    }
+
+    public GrupoForm(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+
     public String getNome() {
         return nome;
     }

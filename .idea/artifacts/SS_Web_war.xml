@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SS-Web:war">
+    <output-path>$PROJECT_DIR$/SS-Web/target</output-path>
+    <root id="archive" name="SS-Web-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="SS-Web:war exploded" />
+    </root>
+  </artifact>
+</component>

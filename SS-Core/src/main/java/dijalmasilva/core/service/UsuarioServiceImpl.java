@@ -6,12 +6,11 @@
 package dijalmasilva.core.service;
 
 import dijalmasilva.entidades.Usuario;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 import dijalmasilva.core.repository.UsuarioRepository;
+import dijalmasilva.entidades.Grupo;
 
 @Named
 public class UsuarioServiceImpl implements UsuarioService {
@@ -64,7 +63,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario adicionarAmigo(Long id, Long amigo) {
+    public Usuario seguirAmigo(Long id, Long amigo) {
         Usuario user = dao.findOne(id);
         Usuario friend = dao.findOne(amigo);
         user.addAmigo(friend);
@@ -73,7 +72,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario removerAmigo(Long id, Long amigo) {
+    public Usuario deixarDeSeguirAmigo(Long id, Long amigo) {
         Usuario user = dao.findOne(id);
         Usuario friend = dao.findOne(amigo);
         user.removeAmigo(friend);
@@ -92,7 +91,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<Usuario> usuarios = dao.findByEmailContaining(email);
         return usuarios;
     }
-
+    
     @Override
     public List<Usuario> listarTodos() {
         return (List<Usuario>) dao.findAll();
@@ -157,5 +156,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         return false;
+    }
+
+    @Override
+    public Usuario seguirGrupo(Usuario u, Grupo grupo) {
+        u.addGrupo(grupo);
+        
+        return dao.save(u);
+    }
+
+    @Override
+    public Usuario deixarDeSeguirGrupo(Usuario u, Grupo g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

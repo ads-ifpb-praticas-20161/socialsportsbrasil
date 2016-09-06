@@ -45,7 +45,7 @@ public class Usuario implements Serializable {
     private byte[] foto;
     private int pontos;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "seguidores")
     private List<Grupo> grupos;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -128,16 +128,16 @@ public class Usuario implements Serializable {
             amigos = new ArrayList<>();
         }
         this.amigos.add(u);
-        this.pontos += 2;
-        u.setPontos(u.getPontos()+5);
+        addPonto(2);
+        u.addPonto(5);
     }
 
     public void removeAmigo(Usuario u) {
         if (amigos != null) {
             this.amigos.remove(u);
         }
-        this.pontos -= 2;
-        u.setPontos(u.getPontos()-5);
+        subtractPonto(2);
+        u.subtractPonto(5);
     }
 
     public String getConta() {
@@ -166,10 +166,12 @@ public class Usuario implements Serializable {
 
     public void addGrupo(Grupo g) {
         this.grupos.add(g);
+        g.getDono().addPonto(2);
     }
 
     public void removeGrupo(Grupo g) {
         this.grupos.remove(g);
+        g.getDono().subtractPonto(2);
     }
 
     public int qtdeSeguindo(){
@@ -191,6 +193,14 @@ public class Usuario implements Serializable {
         }
 
         return false;
+    }
+    
+    public void addPonto(int pontos){
+        this.pontos += pontos;
+    }
+    
+    public void subtractPonto(int pontos){
+        this.pontos -= pontos;
     }
 
     @Override

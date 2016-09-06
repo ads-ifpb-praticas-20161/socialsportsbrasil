@@ -45,7 +45,7 @@
                     </div>
                 </form>
                 <hr class="linha-mais-escura">
-                <a href="#">Grupos (${user.qtdeGrupos()})</a>
+                <a href="/groups/my">Grupos (${user.qtdeGrupos()})</a>
                 <div class="form-group-sm has-feedback">
                     <input type="text" class="form-control" placeholder="Buscar grupos" />
                     <span class="glyphicon form-control-feedback"><img src="/assets/imagens/icons/search-black.png" /></span>
@@ -54,7 +54,7 @@
                     <input type="submit" value="Buscar" class="btn btn-sm btn-default" />
                 </div>
                 <div class="text-left">
-                    <a href="/group/new"><input type="button" value="Criar" class="btn btn-sm btn-default" id="criaGrupo"/></a>
+                    <a href="/groups/new"><input type="button" value="Criar" class="btn btn-sm btn-default" id="criaGrupo"/></a>
                 </div>
             </div>
             <hr class="linha-mais-escura">

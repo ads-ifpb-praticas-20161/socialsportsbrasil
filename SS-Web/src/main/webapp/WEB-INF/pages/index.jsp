@@ -21,7 +21,7 @@
             </div>
             <form action="/user/login" method="POST">
                 <div class="form-group-lg has-feedback">
-                    <input type="text" class="form-control" name="login" required="" placeholder="Nome de usuário"/>
+                    <input type="text" class="form-control" name="login" required="" placeholder="Nome de usuário" autofocus=""/>
                     <span class="glyphicon form-control-feedback"><img src="/assets/imagens/icons/user-black.png" /></span>
                 </div>
                 <div class="form-group-lg has-feedback">

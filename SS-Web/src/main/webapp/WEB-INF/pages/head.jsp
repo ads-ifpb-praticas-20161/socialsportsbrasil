@@ -7,8 +7,6 @@
 <head lang="pt-br">
     <meta charset="UTF-8" />
     <meta name="theme-color" content="#607d8b" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#FF9D0D">
     <script src="/assets/js/jquery-2.1.4.min.js" type="text/javascript"></script>
     <script src="/assets/js/bootstrap.js" type="text/javascript"></script>
     <script src="/assets/js/js.js" type="text/javascript"></script>

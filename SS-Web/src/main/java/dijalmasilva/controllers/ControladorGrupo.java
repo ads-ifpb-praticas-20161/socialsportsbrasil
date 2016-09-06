@@ -14,6 +14,7 @@ import dijalmasilva.form.GrupoForm;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Dijalma Silva <dijalmacz@gmail.com>
  */
 @Controller
-@RequestMapping("/group")
+@RequestMapping("/groups")
 public class ControladorGrupo {
 
     @Inject
@@ -29,6 +30,18 @@ public class ControladorGrupo {
     @Inject
     private IdoloService serviceIdolo;
 
+    @RequestMapping("/my")
+    public String followingGroups(){
+        return "followingGroups";
+    }
+    
+    @RequestMapping("/{id}")
+    public String getGroup(@PathVariable Long id, HttpServletRequest req){
+        Grupo grupo = serviceGrupo.buscar(id);
+        req.setAttribute("group", grupo);
+        return "otherGroup";
+    }
+    
     @RequestMapping("/new")
     public String newGroup() {
         return "newGroup";
@@ -51,14 +64,15 @@ public class ControladorGrupo {
                 req.setAttribute("result", "Não foi possível cadastrar grupo.!");
             }
         }
-        return "group/new";
+        return "newGroup";
     }
 
     private Grupo convertToGrupo(GrupoForm g) {
         Grupo grupo = new Grupo();
-
+        System.out.println(g.getNome());
+        System.out.println(g.getDescricao());
         grupo.setDescricao(g.getDescricao());
-        grupo.setNome(g.getDescricao());
+        grupo.setNome(g.getNome());
 
         return grupo;
     }

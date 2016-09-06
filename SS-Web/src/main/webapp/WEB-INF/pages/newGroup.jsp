@@ -13,7 +13,7 @@
         <h1 style="color: white">Novo grupo</h1>
         <br>
         <div class="modal-cadastro z-index-2 text-left" style="padding: 10px;">
-            <form class="form-group-sm" action="/group/save" method="POST" enctype="multipart/form-data">
+            <form class="form-group-sm" action="/groups/save" method="POST" enctype="multipart/form-data">
                 <br>
                 <div class="form-group">
                     <label class="control-label" for="nomegrupo">Nome do grupo</label>
@@ -21,7 +21,7 @@
                 </div><hr>
                 <div class="form-group">
                     <label class="control-label">Descrição</label>
-                    <textarea class="form-control" style="resize: none" placeholder="Descrição" rows="3"></textarea>
+                    <textarea class="form-control" style="resize: none" placeholder="Descrição" rows="3" name="descricao"></textarea>
                 </div>
                 <hr>
                 <label class="control-label">Escolha o ídolo do grupo</label>

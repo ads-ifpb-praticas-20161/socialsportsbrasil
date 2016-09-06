@@ -263,6 +263,31 @@ form div {
     border-top: 1px solid #e4dada;
 }
 
+.card {
+    background: #90a4ae;
+    border-radius: 4px;
+    margin: 4px;
+    box-shadow: 0 0 6px -1px #000;
+}
+
+.card a {
+    color: white !important;
+}
+
+.title-group{
+    text-align: center;
+    margin: 20px;
+}
+
+.title-group a {
+    float: right;
+    margin: 10px;
+}
+
+.descricao-group {
+    width: 300px;
+}
+
 @media(max-width:1024px){
     #fotoSelecionada {
         height: 500px;

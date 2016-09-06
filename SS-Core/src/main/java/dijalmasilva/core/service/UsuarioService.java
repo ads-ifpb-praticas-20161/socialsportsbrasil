@@ -5,6 +5,7 @@
  */
 package dijalmasilva.core.service;
 
+import dijalmasilva.entidades.Grupo;
 import dijalmasilva.entidades.Usuario;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,13 @@ public interface UsuarioService {
 
     Usuario atualizarPerfil(Usuario u);
 
-    Usuario adicionarAmigo(Long id, Long amigo);
+    Usuario seguirAmigo(Long id, Long amigo);
 
-    Usuario removerAmigo(Long id, Long amigo);
+    Usuario deixarDeSeguirAmigo(Long id, Long amigo);
+    
+    Usuario seguirGrupo(Usuario u, Grupo grupo);
+    
+    Usuario deixarDeSeguirGrupo(Usuario u, Grupo g);
 
     List<Usuario> buscarUsuarios(String nome);
     
