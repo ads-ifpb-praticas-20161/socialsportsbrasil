@@ -88,7 +88,7 @@ public class UsuarioServiceTeste {
     public void testAdicionarAmigo() {
         System.out.println("adicionarAmigo");
         
-        Usuario result = service.adicionarAmigo(3L, 4L);
+        Usuario result = service.seguirAmigo(3L, 4L);
         assertTrue(result.getAmigos().size() == 1);
     }
 
@@ -96,7 +96,7 @@ public class UsuarioServiceTeste {
     public void testRemoverAmigo() {
         System.out.println("removerAmigo");
         
-        Usuario result = service.removerAmigo(3L, 4L);
+        Usuario result = service.deixarDeSeguirAmigo(3L, 4L);
         assertTrue(result.getAmigos().isEmpty());
     }
 

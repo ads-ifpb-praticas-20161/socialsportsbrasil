@@ -9,6 +9,7 @@ import dijalmasilva.core.repository.GrupoRepository;
 import dijalmasilva.core.repository.UsuarioRepository;
 import dijalmasilva.entidades.Grupo;
 import dijalmasilva.entidades.Usuario;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -50,6 +51,11 @@ public class GrupoServiceImpl implements GrupoService {
     @Override
     public Grupo buscar(Long id) {
         return dao.findOne(id);
+    }
+
+    @Override
+    public List<Grupo> buscarPorNome(String nome) {
+        return (List<Grupo>) dao.findByNome(nome);
     }
     
 }

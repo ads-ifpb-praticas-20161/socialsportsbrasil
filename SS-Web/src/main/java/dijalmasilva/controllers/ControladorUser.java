@@ -115,7 +115,7 @@ public class ControladorUser {
     @RequestMapping(value = {"/follow/{id}"}, method = RequestMethod.GET)
     public String adicionarAmigo(@PathVariable Long id, HttpServletRequest req) {
         Usuario user = (Usuario) req.getSession().getAttribute("user");
-        user = serviceUser.adicionarAmigo(user.getId(), id);
+        user = serviceUser.seguirAmigo(user.getId(), id);
         if (user == null) {
             return "erro";
         }else{
@@ -128,7 +128,7 @@ public class ControladorUser {
     @RequestMapping(value = {"/unfollow/{id}"}, method = RequestMethod.GET)
     public String removerAmigo(@PathVariable Long id, HttpServletRequest req) {
         Usuario user = (Usuario) req.getSession().getAttribute("user");
-        user = serviceUser.removerAmigo(user.getId(), id);
+        user = serviceUser.deixarDeSeguirAmigo(user.getId(), id);
         if (user == null) {
             return "erro";
         }else{

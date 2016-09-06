@@ -11,6 +11,7 @@ import dijalmasilva.entidades.Grupo;
 import dijalmasilva.entidades.Idolo;
 import dijalmasilva.entidades.Usuario;
 import dijalmasilva.form.GrupoForm;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,12 @@ public class ControladorGrupo {
         Grupo grupo = serviceGrupo.buscar(id);
         req.setAttribute("group", grupo);
         return "otherGroup";
+    }
+    
+    @RequestMapping("/findByName")
+    public String getGroups(String nome, HttpServletRequest req){
+        serviceGrupo.buscarPorNome(nome);
+        return "groupsfind";
     }
     
     @RequestMapping("/new")

@@ -7,6 +7,7 @@ package dijalmasilva.core.service;
 
 import dijalmasilva.entidades.Grupo;
 import dijalmasilva.entidades.Usuario;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,5 +26,7 @@ public interface GrupoService {
     void remover(Usuario u, Grupo g);
     
     void remover(Long id);
+    
+    List<Grupo> buscarPorNome(String nome);
 
 }

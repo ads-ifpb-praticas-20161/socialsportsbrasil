@@ -6,6 +6,7 @@
 package dijalmasilva.core.repository;
 
 import dijalmasilva.entidades.Grupo;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GrupoRepository extends CrudRepository<Grupo, Long>{
     
+    List<Grupo> findByNome(String nome);
 }
