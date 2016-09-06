@@ -88,7 +88,7 @@ function buscarIdolosPorNome() {
     var nome = $('#inputIdolos').val();
     if (nome !== "") {
         $.ajax({
-            url: "/idolo/" + nome,
+            url: "/idolos/" + nome,
             context: document.body,
             success: function (data) {
 

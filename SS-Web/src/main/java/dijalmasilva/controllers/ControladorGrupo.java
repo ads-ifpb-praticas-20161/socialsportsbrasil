@@ -45,7 +45,8 @@ public class ControladorGrupo {
     
     @RequestMapping("/findByName")
     public String getGroups(String nome, HttpServletRequest req){
-        serviceGrupo.buscarPorNome(nome);
+        List<Grupo> groups = serviceGrupo.buscarPorNome(nome);
+        req.setAttribute("groups", groups);
         return "groupsfind";
     }
     
@@ -76,8 +77,6 @@ public class ControladorGrupo {
 
     private Grupo convertToGrupo(GrupoForm g) {
         Grupo grupo = new Grupo();
-        System.out.println(g.getNome());
-        System.out.println(g.getDescricao());
         grupo.setDescricao(g.getDescricao());
         grupo.setNome(g.getNome());
 

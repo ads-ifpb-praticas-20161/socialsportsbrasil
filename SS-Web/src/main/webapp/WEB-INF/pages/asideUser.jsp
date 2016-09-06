@@ -23,8 +23,10 @@
         <hr class="linha-mais-escura">
         <a href="/groups/my">Grupos (${user.qtdeGrupos()})</a>
         <div class="form-group-sm has-feedback">
-            <input type="text" class="form-control" placeholder="Buscar grupos" />
-            <span class="glyphicon form-control-feedback"><img src="/assets/imagens/icons/search-black.png" /></span>
+            <form action="/groups/findByName" method="POST">
+                <input type="text" class="form-control" placeholder="Buscar grupos" name="nome"/>
+                <span class="glyphicon form-control-feedback"><img src="/assets/imagens/icons/search-black.png" /></span>
+            </form>
         </div>
         <div class="text-right">
             <input type="submit" value="Buscar" class="btn btn-sm btn-default" />

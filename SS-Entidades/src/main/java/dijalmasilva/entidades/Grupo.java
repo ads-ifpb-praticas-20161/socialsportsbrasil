@@ -6,15 +6,12 @@
 package dijalmasilva.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -35,9 +32,6 @@ public class Grupo implements Serializable {
     private Idolo idolo;
     @Column(columnDefinition = "TEXT")
     private String descricao;
-
-    @ManyToMany
-    private List<Usuario> seguidores;
 
     public Grupo() {
     }
@@ -85,22 +79,6 @@ public class Grupo implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public void addSeguidor(Usuario us) {
-        this.seguidores.add(us);
-    }
-
-    public void removeSeguidor(Usuario us) {
-        this.seguidores.remove(us);
-    }
-
-    public List<Usuario> getSeguidores() {
-        return seguidores;
-    }
-
-    public void setSeguidores(List<Usuario> seguidores) {
-        this.seguidores = seguidores;
     }
 
     @Override

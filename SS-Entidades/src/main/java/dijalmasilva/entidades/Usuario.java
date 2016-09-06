@@ -28,6 +28,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Usuario implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -45,9 +46,9 @@ public class Usuario implements Serializable {
     private byte[] foto;
     private int pontos;
 
-    @ManyToMany(mappedBy = "seguidores")
+    
+    @OneToMany
     private List<Grupo> grupos;
-
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Usuario> amigos;
 
