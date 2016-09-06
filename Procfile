@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -Dspring.profiles.active=pro -jar Web/target/Web-1.0-SNAPSHOT.war
+web: java -Dserver.port=$PORT -Dspring.profiles.active=pro -jar SS-Web/target/SS-Web-1.0-SNAPSHOT.war
