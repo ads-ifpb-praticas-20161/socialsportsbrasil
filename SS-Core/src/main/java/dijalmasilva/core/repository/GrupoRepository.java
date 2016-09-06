@@ -17,5 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GrupoRepository extends CrudRepository<Grupo, Long>{
     
-    List<Grupo> findByNome(String nome);
+    List<Grupo> findByNomeContaining(String nome);
 }

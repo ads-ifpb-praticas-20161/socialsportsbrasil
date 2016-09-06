@@ -32,24 +32,24 @@ public class ControladorGrupo {
     private IdoloService serviceIdolo;
 
     @RequestMapping("/my")
-    public String followingGroups(){
+    public String followingGroups() {
         return "followingGroups";
     }
-    
+
     @RequestMapping("/{id}")
-    public String getGroup(@PathVariable Long id, HttpServletRequest req){
+    public String getGroup(@PathVariable Long id, HttpServletRequest req) {
         Grupo grupo = serviceGrupo.buscar(id);
         req.setAttribute("group", grupo);
         return "otherGroup";
     }
-    
+
     @RequestMapping("/findByName")
-    public String getGroups(String nome, HttpServletRequest req){
+    public String getGroups(String nome, HttpServletRequest req) {
         List<Grupo> groups = serviceGrupo.buscarPorNome(nome);
-        req.setAttribute("groups", groups);
+        req.setAttribute("gruposEncontrados", groups);
         return "groupsfind";
     }
-    
+
     @RequestMapping("/new")
     public String newGroup() {
         return "newGroup";
@@ -73,6 +73,24 @@ public class ControladorGrupo {
             }
         }
         return "newGroup";
+    }
+
+    @RequestMapping("/follow/{id}")
+    public String seguirGrupo(@PathVariable Long id, HttpServletRequest req) {
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        Usuario u = serviceGrupo.seguirGrupo(id, user);
+        req.getSession().setAttribute("user", u);
+        
+        return "redirect:/groups/" + id;
+    }
+    
+    @RequestMapping("/unfollow/{id}")
+    public String deixarDeSeguirGrupo(@PathVariable Long id, HttpServletRequest req) {
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        Usuario u = serviceGrupo.deixarDeSeguirGrupo(id, user);
+        req.getSession().setAttribute("user", u);
+        
+        return "redirect:/groups/" + id;
     }
 
     private Grupo convertToGrupo(GrupoForm g) {

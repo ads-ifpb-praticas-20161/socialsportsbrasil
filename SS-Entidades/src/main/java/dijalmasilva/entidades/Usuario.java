@@ -19,7 +19,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -47,7 +46,7 @@ public class Usuario implements Serializable {
     private int pontos;
 
     
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Grupo> grupos;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Usuario> amigos;
@@ -189,6 +188,16 @@ public class Usuario implements Serializable {
     public boolean isFollowingUser(Long seguindo) {
         for (Usuario amigo : amigos) {
             if (Objects.equals(amigo.getId(), seguindo)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+     public boolean isFollowingGroup(Long seguindo) {
+        for (Grupo grupo : grupos) {
+            if (Objects.equals(grupo.getId(), seguindo)) {
                 return true;
             }
         }

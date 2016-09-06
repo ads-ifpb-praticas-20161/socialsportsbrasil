@@ -12,25 +12,25 @@
         <%@include file="header.jsp" %>
         <%@include file="asideUser.jsp" %>
         <aside class="conteudo">
-            <c:if test="${usuariosEncontrados.isEmpty() == false}">
-                <h2>Usuários Encontrados</h2>
+            <c:if test="${gruposEncontrados.isEmpty() == false}">
+                <h2>Grupos encontrados</h2>
                 <br><br><br>
                 <div class="row">
-                    <c:forEach items="${usuariosEncontrados}" var="usuario">
-                        <div class="col-lg-3 col-sm-4 col-xs-12 col-md-4">
-                            <c:if test="${usuario.foto == null}">
-                                <img src="/assets/imagens/boy.svg" alt="${usuario.nome}" class="imgPerfil">
-                            </c:if>
-                            <c:if test="${usuario.foto != null}">
-                                <img src="/user/image/${usuario.id}" alt="${usuario.nome}" class="imgPerfil" onclick="abrirImagemDoUsuario(${usuario.id})">
-                            </c:if>
-                            <h4><a href="/user/otherUser/${usuario.id}">${usuario.nome} ${usuario.sobrenome}</a></h4>
+                    <c:forEach items="${gruposEncontrados}" var="group">
+                        <div class="col-lg-3 col-sm-4 col-xs-12 col-md-4 card">
+                            <h4>
+                                <a href="/groups/${group.id}">${group.nome}</a>
+                            </h4>
+                            <p>Dono:
+                                <c:if test="${group.dono.id == user.id}"><a href="#">Você</a></c:if>
+                                <c:if test="${group.dono.id != user.id}"><a href="/user/otherUser/${group.dono.id}">${group.dono.nome}</a></c:if>
+                            </p>
                         </div>
                     </c:forEach>
                 </div>
             </c:if>
-            <c:if test="${usuariosEncontrados == null}">
-                <h3>Ninguém foi encontrado</h3>
+            <c:if test="${gruposEncontrados.isEmpty() != false}">
+                <h3>Não foi encontrado nenhum grupo.</h3>
             </c:if>
         </aside>
          <c:if test="${result != null}" >

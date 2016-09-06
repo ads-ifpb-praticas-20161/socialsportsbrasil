@@ -55,7 +55,25 @@ public class GrupoServiceImpl implements GrupoService {
 
     @Override
     public List<Grupo> buscarPorNome(String nome) {
-        return (List<Grupo>) dao.findByNome(nome);
+        return (List<Grupo>) dao.findByNomeContaining(nome);
+    }
+
+    @Override
+    public Usuario seguirGrupo(Long idGrupo, Usuario u) {
+        Grupo group = dao.findOne(idGrupo);
+        u.addGrupo(group);
+        daoUsuario.save(group.getDono());
+        
+        return daoUsuario.save(u);
+    }
+
+    @Override
+    public Usuario deixarDeSeguirGrupo(Long idGrupo, Usuario u) {
+        Grupo group = dao.findOne(idGrupo);
+        u.removeGrupo(group);
+        daoUsuario.save(group.getDono());
+        
+        return daoUsuario.save(u);
     }
     
 }

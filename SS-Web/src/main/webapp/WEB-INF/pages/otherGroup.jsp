@@ -21,11 +21,11 @@
                         <a class="btn btn-sm btn-primary" href="/groups/${group.id}/edit">Editar grupo</a>
                     </c:if>
                     <c:if test="${group.dono.id != user.id}">
-                        <c:if test="${user.isFollowingUser(outroUsuario.id) == false}">
-                            <a class="btn btn-sm btn-primary" href="/user/follow/${outroUsuario.id}">Seguir</a>
+                        <c:if test="${user.isFollowingGroup(group.id) == false}">
+                            <a class="btn btn-sm btn-primary" href="/groups/follow/${group.id}">Seguir</a>
                         </c:if>
-                        <c:if test="${user.isFollowingUser(outroUsuario.id) != false}">
-                            <a class="btn btn-sm btn-danger" href="/user/unfollow/${outroUsuario.id}">Deixar de seguir</a>
+                        <c:if test="${user.isFollowingGroup(group.id) != false}">
+                            <a class="btn btn-sm btn-danger" href="/groups/unfollow/${group.id}">Deixar de seguir</a>
                         </c:if>
                     </c:if>
                 </div>

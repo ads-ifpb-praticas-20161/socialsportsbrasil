@@ -28,5 +28,8 @@ public interface GrupoService {
     void remover(Long id);
     
     List<Grupo> buscarPorNome(String nome);
+    
+    Usuario seguirGrupo(Long idGrupo, Usuario u);
 
+    Usuario deixarDeSeguirGrupo(Long idGrupo, Usuario u);
 }
