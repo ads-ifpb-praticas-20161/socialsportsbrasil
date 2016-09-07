@@ -13,7 +13,7 @@
             <h3>Novo Ídolo</h3>
         </div>
         <div class="modal-body modal-newIdolo">
-            <form class="form-group-sm" action="/idolo/new" method="POST" enctype="multipart/form-data">
+            <form class="form-group-sm" action="/idolos/new" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <img src="/assets/imagens/stars.png" class="imgCadastro" alt="Imagem do ídolo ou equipe"/>
                     <input type="button" class="btn btn-primary form-control" name="foto" id="buttonImagem" value="Escolher imagem" onclick="escolherFoto()" />
