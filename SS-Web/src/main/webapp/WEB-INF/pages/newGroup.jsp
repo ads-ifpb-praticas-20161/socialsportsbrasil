@@ -40,7 +40,7 @@
                     <input type="submit" class="btn btn-success form-control" value="Criar grupo" />
                 </div>
                 <div>
-                    <a href="/user/home"><input type="button" class="btn btn-danger form-control" value="Cancelar"/></a>
+                    <a href="/user/home"><input type="button" class="btn btn-danger form-control" value="Voltar"/></a>
                 </div>
             </form>
         </div>
