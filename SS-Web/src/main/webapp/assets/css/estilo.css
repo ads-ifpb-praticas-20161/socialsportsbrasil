@@ -281,11 +281,24 @@ form div {
 
 .title-group a {
     float: right;
-    margin: 10px;
+    margin: 6px;
 }
 
 .descricao-group {
     width: 300px;
+}
+
+.modal-event {
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0px 0px 20px -2px #FFFFFF;
+    top: 100px;
+    padding: 6px;
+    text-align: center;
+    background: #F3F3F3;
+    margin: 0 auto;
+    max-width: 415px;
+    min-height: 250px;
 }
 
 @media(max-width:1024px){

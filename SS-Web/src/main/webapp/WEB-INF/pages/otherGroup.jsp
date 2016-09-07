@@ -12,6 +12,7 @@
     <body>
         <%@include file="header.jsp" %>
         <%@include file="asideUser.jsp" %>
+        <%@include file="newEvent.jsp" %>
         <aside class="conteudo">
             <div>
                 <div class="title-group">
@@ -19,6 +20,7 @@
                     <c:if test="${group.dono.id == user.id}">
                         <a class="btn btn-sm btn-danger" href="/groups/${group.id}/delete">Excluir grupo</a>
                         <a class="btn btn-sm btn-primary" href="/groups/${group.id}/edit">Editar grupo</a>
+                        <a class="btn btn-sm btn-success" href="#" onclick="novoEvento(group.idolo)">Novo evento</a>
                     </c:if>
                     <c:if test="${group.dono.id != user.id}">
                         <c:if test="${user.isFollowingGroup(group.id) == false}">
