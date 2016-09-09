@@ -14,9 +14,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <modules>
-        <module>Entidades</module>
-        <module>Core</module>
-        <module>Web</module>
+        <module>SS-Web</module>
+        <module>SS-Entidades</module>
+        <module>SS-Core</module>
     </modules>
     <profiles>
     <profile>

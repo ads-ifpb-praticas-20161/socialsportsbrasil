@@ -1,9 +1,9 @@
-# betsmundo #
+# socialsportsbrasil #
 
-Sistema de apostas de jogos de futebol, feito pela Empresa Júnior (Recursive Júnior) do Curso de Análise e Desenvolvimento do IFPB - Campus Cajazeiras.
+Rede Social de esportes
 
 ### Contribuidores ###
 
-* Lucas Kennedy (Proprietário)
-* Marcelo Augusto (Desenvolvedor)
+* Asheley (Desenvolvedora)
+* José Ferreira (Desenvolvedor)
 * Manoel Dijalma (Desenvolvedor)
