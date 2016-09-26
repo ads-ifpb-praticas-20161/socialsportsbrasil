@@ -301,6 +301,14 @@ form div {
     min-height: 250px;
 }
 
+.hand-with-cursor:hover {
+    cursor: pointer !important;
+}
+
+.noUnderscore a:hover {
+    text-decoration: none;
+}
+
 @media(max-width:1024px){
     #fotoSelecionada {
         height: 500px;

@@ -25,7 +25,7 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long>{
     
     public List<Usuario> findByUsernameContaining(String username);
     
-    public List<Usuario> findByNomeContainingAndIdNotAndContaNotLike(String nome, Long id, String conta);
+    public List<Usuario> findByNomeContainingAndIdNotAndContaNotLikeIgnoreCase(String nome, Long id, String conta);
     
-    public List<Usuario> findBySobrenomeContainingAndIdNotAndContaNotLike(String sobrenome, Long id, String conta);
+    public List<Usuario> findBySobrenomeContainingAndIdNotAndContaNotLikeIgnoreCase(String sobrenome, Long id, String conta);
 }

@@ -6,7 +6,9 @@
 package dijalmasilva.controllers;
 
 import dijalmasilva.core.service.UsuarioService;
+import dijalmasilva.core.service.VisitaService;
 import dijalmasilva.entidades.Usuario;
+import dijalmasilva.entidades.Visita;
 import dijalmasilva.form.UsuarioForm;
 import java.io.IOException;
 import java.sql.Date;
@@ -32,16 +34,23 @@ public class ControladorUser {
 
     @Inject
     private UsuarioService serviceUser;
+    @Inject
+    private VisitaService serviceVisita;
 
     @RequestMapping("/home")
-    public String home() {
+    public String home(HttpServletRequest req) {
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
+        List<Usuario> visitas = serviceUser.visitaramSeuPerfil(user.getId());
+        req.setAttribute("visitantes", visitas);
         return "home";
     }
 
     @RequestMapping("/otherUser/{id}")
     public String otherUser(@PathVariable Long id, HttpServletRequest req) {
         Usuario outroUsuario = serviceUser.findById(id);
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
         req.setAttribute("outroUsuario", outroUsuario);
+        serviceVisita.visitou(user.getId(), id);
         return "otherUser";
     }
 
@@ -59,7 +68,12 @@ public class ControladorUser {
             req.setAttribute("result", "Nome de usuário ou senha inválidos.");
             return "index";
         } else {
+            List<Usuario> visitaramSeuPerfil = serviceUser.visitaramSeuPerfil(user.getId());
+            for (Usuario usuario : visitaramSeuPerfil) {
+                System.out.println(usuario.getNome());
+            }
             req.getSession().setAttribute("user", user);
+            req.setAttribute("visitantes", visitaramSeuPerfil);
             req.setAttribute("result", "Bem vindo!");
         }
         return "home";

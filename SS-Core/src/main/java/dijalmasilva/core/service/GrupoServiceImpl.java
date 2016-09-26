@@ -21,6 +21,7 @@ public class GrupoServiceImpl implements GrupoService {
     @Inject 
     private UsuarioRepository daoUsuario;
     
+    
     @Override
     public Grupo salvar(Usuario u, Grupo g) {
         g.setDono(u);

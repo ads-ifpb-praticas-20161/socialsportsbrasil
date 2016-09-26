@@ -11,12 +11,19 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import dijalmasilva.core.repository.UsuarioRepository;
 import dijalmasilva.entidades.Grupo;
+import dijalmasilva.entidades.Visita;
+import java.util.ArrayList;
+import java.util.Objects;
 
 @Named
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Inject
     private UsuarioRepository dao;
+    @Inject
+    private VisitaService visitaService;
+//    @Inject
+//    private LogService logService;
 
     @Override
     public Usuario login(String emailOuUsername, String password) {
@@ -47,6 +54,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario salvarUsuario(Usuario u) {
+//        Log l = new Log(UUID.randomUUID().toString(), "Cadastro de usuário", u.getNome(), LocalDate.now());
+//        logService.salvar(l);
         return dao.save(u);
     }
 
@@ -91,7 +100,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<Usuario> usuarios = dao.findByEmailContaining(email);
         return usuarios;
     }
-    
+
     @Override
     public List<Usuario> listarTodos() {
         return (List<Usuario>) dao.findAll();
@@ -128,12 +137,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<Usuario> usuariosEncontradosPorNome;
         List<Usuario> usuariosEncontradosSobrenome;
         if (nomes != null && nomes.length > 1) {
-            usuariosEncontradosPorNome = dao.findByNomeContainingAndIdNotAndContaNotLike(nomes[0], id, "Desativada");
-            usuariosEncontradosSobrenome = dao.findBySobrenomeContainingAndIdNotAndContaNotLike(nomes[1], id, "Desativada");
+            usuariosEncontradosPorNome = dao.findByNomeContainingAndIdNotAndContaNotLikeIgnoreCase(nomes[0], id, "Desativada");
+            usuariosEncontradosSobrenome = dao.findBySobrenomeContainingAndIdNotAndContaNotLikeIgnoreCase(nomes[1], id, "Desativada");
 
         } else {
-            usuariosEncontradosPorNome = dao.findByNomeContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
-            usuariosEncontradosSobrenome = dao.findBySobrenomeContainingAndIdNotAndContaNotLike(nome, id, "Desativada");
+            usuariosEncontradosPorNome = dao.findByNomeContainingAndIdNotAndContaNotLikeIgnoreCase(nome, id, "Desativada");
+            usuariosEncontradosSobrenome = dao.findBySobrenomeContainingAndIdNotAndContaNotLikeIgnoreCase(nome, id, "Desativada");
         }
 
         usuariosEncontrados = usuariosEncontradosPorNome;
@@ -161,12 +170,36 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario seguirGrupo(Usuario u, Grupo grupo) {
         u.addGrupo(grupo);
-        
+
         return dao.save(u);
     }
 
     @Override
     public Usuario deixarDeSeguirGrupo(Usuario u, Grupo g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Usuario> visitaramSeuPerfil(Long id) {
+        List<Visita> visitas = visitaService.visitasDeHoje(id);
+        List<Usuario> usuarios = new ArrayList<>();
+
+        for (Visita visita : visitas) {
+            if (!isExistInVisit(visita.getVisitante(), usuarios)) {
+                usuarios.add(dao.findOne(visita.getVisitante()));
+            }
+        }
+
+        return usuarios;
+    }
+
+    private boolean isExistInVisit(Long id, List<Usuario> usuarios) {
+        for (Usuario u : usuarios) {
+            if (Objects.equals(u.getId(), id)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

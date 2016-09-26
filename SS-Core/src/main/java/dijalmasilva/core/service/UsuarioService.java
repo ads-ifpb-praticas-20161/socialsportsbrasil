@@ -42,4 +42,6 @@ public interface UsuarioService {
     List<Usuario> buscarUsuariosComIdDiferenteAndNaoDesativada(String nome, Long id);
     
     boolean isFollow(Long id, Long seguindo);
+    
+    List<Usuario> visitaramSeuPerfil(Long id);
 }

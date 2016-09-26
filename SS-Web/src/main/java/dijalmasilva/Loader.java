@@ -16,15 +16,24 @@
 
 package dijalmasilva;
 
+import dijalmasilva.interceptors.TransactionInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
-public class Loader{
+public class Loader extends WebMvcConfigurerAdapter{
     
     public static void main(String[] args) {
         SpringApplication.run( Loader.class,args);
     }
 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new TransactionInterceptor()).addPathPatterns("/user/home/*");
+        registry.addInterceptor(new TransactionInterceptor()).addPathPatterns("/groups/*");
+        registry.addInterceptor(new TransactionInterceptor()).addPathPatterns("/idolos/*");
+    }
 
 }

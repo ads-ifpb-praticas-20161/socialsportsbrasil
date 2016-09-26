@@ -2,3 +2,14 @@
 /SS-Entidades/target/
 /SS-Core/target/
 /SS-Core/nbproject/
+
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+

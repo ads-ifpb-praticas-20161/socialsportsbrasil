@@ -14,7 +14,7 @@
         <c:if test="${user.foto != null}">
             <img src="/user/image/${user.id}" alt="${user.username}" class="imgPerfil" onclick="abrirImagemDoUsuario(${user.id})"/>
         </c:if>
-        <a href="/user/home"><label class="text-capitalize" style="color: white">${user.nome} ${user.sobrenome}</label></a>
+        <a href="/user/home"><label class="text-capitalize hand-with-cursor" style="color: white">${user.nome} ${user.sobrenome}</label></a>
     </div>
     <div class="text-right">
         <a href="/user/logout" id="sair"><img src="/assets/imagens/logout.png" title="Sair" width="30"/></a>
