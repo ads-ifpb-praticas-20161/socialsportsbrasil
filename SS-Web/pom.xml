@@ -76,4 +76,17 @@
             
         </plugins>
     </build>
+    <profiles>
+      <profile>
+            <id>release</id>
+            <distributionManagement>
+                <repository>
+                    <id>bintray-ads-ifpb-praticas-maven</id>
+                    <name>ads-ifpb-praticas-maven</name>
+                    <url>https://dl.bintray.com/joseferreir/socialsportsbrasil</url>
+                            
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>
