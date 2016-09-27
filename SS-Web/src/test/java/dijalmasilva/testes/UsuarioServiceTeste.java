@@ -5,7 +5,6 @@
  */
 package dijalmasilva.testes;
 
-import dijalmasilva.Loader;
 import dijalmasilva.core.service.UsuarioService;
 import dijalmasilva.entidades.Usuario;
 import java.time.LocalDate;
@@ -13,34 +12,43 @@ import java.util.List;
 import javax.inject.Inject;
 import org.junit.After;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  *
  * @author dijalma
  */
 @RunWith(SpringJUnit4ClassRunner.class)   // 1
-@SpringApplicationConfiguration(classes = Loader.class)   // 2
-@WebAppConfiguration   // 3
-@IntegrationTest("server.port:0") 
+@ContextConfiguration
 public class UsuarioServiceTeste {
 
+    private EmbeddedDatabaseBuilder builder;
+    private EmbeddedDatabase db;
+    
+    @Before
+    private void init(){
+        this.builder = new EmbeddedDatabaseBuilder();
+        this.db = builder.setType(EmbeddedDatabaseType.H2).addScript("db/schema.sql").addScript("db/test-data.sql").build();
+    }
+    
     @Inject
     private UsuarioService service;
     
     @After
     public void close(){
+        db.shutdown();
         service = null;
     }
     
-//    @Test
+    @Test
     public void testLogin() {
-        System.out.println("login");
         String emailOuUsername = "dijalma";
         String password = "manoeldj20";
         Usuario expResult = new Usuario();
@@ -51,7 +59,6 @@ public class UsuarioServiceTeste {
 
     @Test
     public void testSalvarUsuario() {
-        System.out.println("salvarUsuario");
         Usuario u = new Usuario();
         u.setConta("ATIVADA");
         u.setEmail("teste@gmail.com");
@@ -66,58 +73,49 @@ public class UsuarioServiceTeste {
         assertEquals(expResult.getEmail(), result.getEmail());
     }
 
-//    @Test
+    @Test
     public void testDesativarConta() {
-        System.out.println("desativarConta");
         Long id = 3L;
         service.desativarConta(id);
         Usuario u = service.findById(id);
         assertEquals("DESATIVADA", u.getConta());
     }
 
-//    @Test
+    @Test
     public void testAtualizarPerfil() {
-        System.out.println("atualizarPerfil");
         Usuario u = service.findById(7L);
         u.setNome("Teste2000");
         Usuario result = service.atualizarPerfil(u);
         assertEquals(u.getNome(), result.getNome());
     }
 
-//    @Test
+    @Test
     public void testAdicionarAmigo() {
-        System.out.println("adicionarAmigo");
-        
         Usuario result = service.seguirAmigo(3L, 4L);
         assertTrue(result.getAmigos().size() == 1);
     }
 
-//    @Test
+    @Test
     public void testRemoverAmigo() {
-        System.out.println("removerAmigo");
-        
         Usuario result = service.deixarDeSeguirAmigo(3L, 4L);
         assertTrue(result.getAmigos().isEmpty());
     }
 
-//    @Test
+    @Test
     public void testBuscarUsuarios() {
-        System.out.println("buscarUsuarios");
         String nome = "dijalma";
         List<Usuario> result = service.buscarUsuarios(nome);
         assertTrue(result.size() == 1);
     }
 
-//    @Test
+    @Test
     public void testListarTodos() {
-        System.out.println("listarTodos");
         List<Usuario> result = service.listarTodos();
         assertTrue(result.size() == 4);
     }
 
-//    @Test
+    @Test
     public void testFindById() {
-        System.out.println("findById");
         Long id = 3L;
         Usuario result = service.findById(id);
         assertEquals("Dijalma", result.getNome());

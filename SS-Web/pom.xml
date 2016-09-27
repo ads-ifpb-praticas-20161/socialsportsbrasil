@@ -55,6 +55,10 @@
             <artifactId>junit</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>SS-Core</artifactId>
             <version>${project.version}</version>
@@ -73,7 +77,18 @@
                     <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
             </plugin>
-            
+            <!-- embedded Jetty server, for testing -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.11.v20150529</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/spring-mvc-db</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
         </plugins>
         
     </build>
