@@ -28,7 +28,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)   // 1
 @SpringApplicationConfiguration(classes = Loader.class)   // 2
 @WebAppConfiguration   // 3
-@IntegrationTest("server.port:0")
 public class IdoloServiceTeste {
 
     @Inject
@@ -40,7 +39,7 @@ public class IdoloServiceTeste {
         service = null;
     }
 
-//    @Test
+    @Test
     public void testeSalvarIdolo() {
         Idolo i = new Idolo();
         i.setEsporte(Esporte.FUTEBOL);
@@ -51,7 +50,7 @@ public class IdoloServiceTeste {
         assertEquals(i.getNome(), resultado.getNome());
     }
     
-//    @Test
+    @Test
     public void testeBuscarIdolo(){
         Idolo i = service.buscar(12L);
         assertEquals("Neymar", i.getNome());

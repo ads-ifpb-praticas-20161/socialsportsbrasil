@@ -6,65 +6,114 @@
 package dijalmasilva.testes;
 
 import dijalmasilva.Loader;
-import dijalmasilva.core.service.GrupoService;
-import dijalmasilva.core.service.UsuarioService;
+import dijalmasilva.core.repository.GrupoRepository;
+import dijalmasilva.core.repository.IdoloRepository;
+import dijalmasilva.core.repository.UsuarioRepository;
 import dijalmasilva.entidades.Grupo;
-import javax.inject.Inject;
-import org.junit.After;
+import dijalmasilva.entidades.Idolo;
+import dijalmasilva.entidades.Usuario;
+import dijalmasilva.enums.Esporte;
+import dijalmasilva.enums.TipoIdolo;
+import java.time.LocalDate;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.IntegrationTest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author dijalma
  */
-@RunWith(SpringJUnit4ClassRunner.class)   // 1
-@SpringApplicationConfiguration(classes = Loader.class)   // 2
-@WebAppConfiguration   // 3
-@IntegrationTest("server.port:0")
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@SpringApplicationConfiguration(Loader.class)
+@DataJpaTest
 public class GrupoServiceTeste {
 
-    @Inject
-    private GrupoService service;
-    @Inject
-    private UsuarioService serviceUsuario;
+    @Autowired
+    private TestEntityManager em;
+    
+    @Autowired
+    private GrupoRepository groupRepository;
+    @Autowired
+    private UsuarioRepository userRepository;
+    @Autowired
+    private IdoloRepository idoloRepository;
+    
 
-    @After
-    public void close() {
-        service = null;
+    @Before
+    public void init(){
+        Usuario u = new Usuario();
+        u.setAmigos(null);
+        u.setConta("ATIVADA");
+        u.setDataDeNascimento(LocalDate.now());
+        u.setEmail("teste@gmail.com");
+        u.setNome("teste");
+        u.setSobrenome("sobreteste");
+        u.setSenha("123");
+        u.setGrupos(null);
+        u.setPontos(0);
+        u.setFoto(null);
+        Idolo i = new Idolo();
+        i.setEsporte(Esporte.BASQUETE);
+        i.setFoto(null);
+        i.setNome("Michael Jordan");
+        i.setTipo(TipoIdolo.JOGADOR);
+        Usuario us = em.persist(u);
+        Idolo ido = em.persist(i);
     }
+    
 
-//    @Test
+    @Test
     public void testeSalvarGrupo() {
-//        Usuario dono = serviceUsuario.findById(9L);
-//        Idolo idolo = new Idolo();
-//        idolo.setEsporte(Esporte.BASQUETE);
-//        idolo.setTipo(TipoIdolo.JOGADOR);
-//        idolo.setNome("Michael Jordan");
-//        Grupo esperado = new Grupo(dono, idolo);
-//        esperado.setNome("O basquete de Jordan");
-//        esperado.setDescricao("OIjasdoijasodijaosdjioasjdoiasjdoijasdoijasoidjsaoi");
-//        Grupo resultado = service.salvar(esperado);
-//
-//        assertEquals(esperado.getNome(), resultado.getNome());
+        Usuario dono = userRepository.findByEmail("teste@gmail.com");
+        Idolo idolo = idoloRepository.findByNome("Michael Jordan");
+        Grupo esperado = new Grupo();
+        esperado.setDescricao("Teste grupo");
+        esperado.setDono(dono);
+        esperado.setIdolo(idolo);
+        esperado.setNome("O basquete de Jordan");
+        esperado.setDescricao("OIjasdoijasodijaosdjioasjdoiasjdoijasdoijasoidjsaoi");
+        Grupo resultado = em.persist(esperado);
+
+        assertEquals(esperado.getNome(), resultado.getNome());
     }
     
-//    @Test
+    @Test
     public void testeBuscarGrupo(){
-        Grupo result = service.buscar(10L);
-        assertEquals("O basquete de Jordan", result.getNome());
+        Usuario dono = userRepository.findByEmail("teste@gmail.com");
+        Idolo idolo = idoloRepository.findByNome("Michael Jordan");
+        Grupo esperado = new Grupo();
+        esperado.setDescricao("Grupo 2");
+        esperado.setDono(dono);
+        esperado.setIdolo(idolo);
+        esperado.setNome("Grupo 2 teste");
+        esperado.setDescricao("OIjasdoijasodijaosdjioasjdoiasjdoijasdoijasoidjsaoi");
+        em.persist(esperado);
+        Grupo result = groupRepository.findByNomeContaining("Grupo 2 teste").get(0);
+        assertEquals("Grupo 2 teste", result.getNome());
     }
     
-//    @Test
+    @Test
     public void testeAtualizarGrupo(){
-//        Grupo esperado = service.buscar(10L);
-//        esperado.setDescricao("Novo basquete Brasil");
-//        Grupo resultado = service.salvar(esperado);
-//        
-//        assertEquals(esperado.getDescricao(), resultado.getDescricao());
+        Usuario dono = userRepository.findByEmail("teste@gmail.com");
+        Idolo idolo = idoloRepository.findByNome("Michael Jordan");
+        Grupo esperado = new Grupo();
+        esperado.setDescricao("Grupo 3");
+        esperado.setDono(dono);
+        esperado.setIdolo(idolo);
+        esperado.setNome("Grupo 3 teste");
+        esperado.setDescricao("OIjasdoijasodijaosdjioasjdoiasjdoijasdoijasoidjsaoi");
+        Grupo gg = em.persist(esperado);
+        gg.setNome("Teste atualizado");
+        Grupo save = groupRepository.save(gg);
+        assertEquals("Teste atualizado", save.getNome());
     }
 }
