@@ -7,9 +7,7 @@ package dijalmasilva.testes;
 
 import dijalmasilva.Loader;
 import dijalmasilva.core.service.IdoloService;
-import dijalmasilva.entidades.Grupo;
 import dijalmasilva.entidades.Idolo;
-import dijalmasilva.entidades.Resultado;
 import dijalmasilva.enums.Esporte;
 import dijalmasilva.enums.TipoIdolo;
 import java.util.ArrayList;
@@ -48,7 +46,6 @@ public class IdoloServiceTeste {
         i.setEsporte(Esporte.FUTEBOL);
         i.setNome("Neymar");
         i.setTipo(TipoIdolo.JOGADOR);
-        i.setResultados(new ArrayList<Resultado>());
         Idolo resultado = service.salvar(i);
 
         assertEquals(i.getNome(), resultado.getNome());

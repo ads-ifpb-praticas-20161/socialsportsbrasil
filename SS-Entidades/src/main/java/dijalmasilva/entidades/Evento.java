@@ -9,6 +9,7 @@ import dijalmasilva.enums.TipoResultado;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -34,7 +35,7 @@ public class Evento implements Serializable {
     private LocalDateTime horaInicio;
     private LocalDateTime horaFim;
     @Enumerated
-    private TipoResultado resultado;
+    private List<TipoResultado> tiposDeResultados;
 
     public Long getId() {
         return id;
@@ -76,12 +77,20 @@ public class Evento implements Serializable {
         this.horaFim = horaFim;
     }
 
-    public TipoResultado getResultado() {
-        return resultado;
+    public List<TipoResultado> getTiposDeResultados() {
+        return tiposDeResultados;
     }
 
-    public void setResultado(TipoResultado resultado) {
-        this.resultado = resultado;
+    public void setTiposDeResultados(List<TipoResultado> tiposDeResultados) {
+        this.tiposDeResultados = tiposDeResultados;
+    }
+
+    public void addTipoDeResultado(TipoResultado tipo) {
+        this.tiposDeResultados.add(tipo);
+    }
+
+    public void removeTipoDeResultado(TipoResultado tipo) {
+        this.tiposDeResultados.remove(tipo);
     }
 
     @Override
@@ -111,15 +120,12 @@ public class Evento implements Serializable {
         if (!Objects.equals(this.horaFim, other.horaFim)) {
             return false;
         }
-        if (this.resultado != other.resultado) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Event{" + "id=" + id + ", grupo=" + grupo + ", dataDoEvento=" + dataDoEvento + ", horaInicio=" + horaInicio + ", horaFim=" + horaFim + ", resultado=" + resultado + '}';
+        return "Evento{" + "id=" + id + ", grupo=" + grupo + ", dataDoEvento=" + dataDoEvento + ", horaInicio=" + horaInicio + ", horaFim=" + horaFim + ", tiposDeResultados=" + tiposDeResultados + '}';
     }
 
 }

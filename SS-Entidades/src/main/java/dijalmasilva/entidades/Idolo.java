@@ -39,8 +39,6 @@ public class Idolo implements Serializable {
     private String nome;
     @Basic(fetch = FetchType.LAZY)
     private byte[] foto;
-    @OneToMany(mappedBy = "idolo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<Resultado> resultados;
 
     public Long getId() {
         return id;
@@ -74,22 +72,6 @@ public class Idolo implements Serializable {
         this.nome = nome;
     }
 
-    public List<Resultado> getResultados() {
-        return resultados;
-    }
-
-    public void setResultados(List<Resultado> resultados) {
-        this.resultados = resultados;
-    }
-
-    public void addResultado(Resultado r) {
-        this.resultados.add(r);
-    }
-
-    public void removeResultado(Resultado r) {
-        this.resultados.remove(r);
-    }
-    
     public byte[] getFoto() {
         return foto;
     }
@@ -127,7 +109,7 @@ public class Idolo implements Serializable {
 
     @Override
     public String toString() {
-        return "Idolo{" + "id=" + id + ", tipo=" + tipo + ", esporte=" + esporte + ", nome=" + nome + ", resultados=" + resultados + '}';
+        return "Idolo{" + "id=" + id + ", tipo=" + tipo + ", esporte=" + esporte + ", nome=" + nome + ", foto=" + foto + '}';
     }
 
 }
