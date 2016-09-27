@@ -1,0 +1,15 @@
+dijalmasilva/core/service/IdoloService.class
+dijalmasilva/core/repository/VisitaRepository.class
+dijalmasilva/core/service/VisitaServiceImpl.class
+dijalmasilva/core/service/GrupoService.class
+dijalmasilva/core/repository/UsuarioRepository.class
+dijalmasilva/core/repository/EventoRepository.class
+dijalmasilva/core/service/EventoServiceImpl.class
+dijalmasilva/core/service/VisitaService.class
+dijalmasilva/core/service/IdoloServiceImpl.class
+dijalmasilva/core/service/UsuarioService.class
+dijalmasilva/core/service/EventoService.class
+dijalmasilva/core/service/UsuarioServiceImpl.class
+dijalmasilva/core/service/GrupoServiceImpl.class
+dijalmasilva/core/repository/IdoloRepository.class
+dijalmasilva/core/repository/GrupoRepository.class

@@ -1,7 +1,3 @@
-/SS-Web/target/
-/SS-Entidades/target/
-/SS-Core/target/
-/SS-Core/nbproject/
 
 *.class
 
@@ -12,4 +8,6 @@
 *.jar
 *.war
 *.ear
+
+
 
