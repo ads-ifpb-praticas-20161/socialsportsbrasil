@@ -20,7 +20,7 @@
                     <c:if test="${group.dono.id == user.id}">
                         <a class="btn btn-sm btn-danger" href="/groups/${group.id}/delete">Excluir grupo</a>
                         <a class="btn btn-sm btn-primary" href="/groups/${group.id}/edit">Editar grupo</a>
-                        <a class="btn btn-sm btn-success" href="#" onclick="novoEvento(group.idolo)">Novo evento</a>
+                        <a class="btn btn-sm btn-success" href="#" onclick="novoEvento()">Novo evento</a>
                     </c:if>
                     <c:if test="${group.dono.id != user.id}">
                         <c:if test="${user.isFollowingGroup(group.id) == false}">
@@ -41,6 +41,40 @@
                 <div class="">
                     <h4>Descrição do grupo</h4>
                     <p>${group.descricao}</p>
+                </div>
+                <br>
+                <div class="row">
+
+                    <c:if test="${eventos.isEmpty()}">
+                        <h3>Sem eventos.</h3>
+                    </c:if>
+                    <c:if test="${eventos.isEmpty() == false}">
+                        <h3>Eventos do grupo</h3>
+                        <c:forEach items="${eventos}" var="evento">
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6">
+                                <div class="event-card">
+                                    <h4>${evento.descricao} - ${evento.getDataFormatado()}</h4>
+                                    <hr>
+                                    <h4>Possíveis resultados: </h4>
+                                    <h5>
+                                        <c:forEach items="${evento.tiposDeResultados}" var="resultado">
+                                            ${resultado} 
+                                        </c:forEach>
+                                    </h5>
+                                    <br>
+                                    <div class="functions-event" align="right" style="padding-right: 8px">
+                                        <c:if test="${user.isFollowingGroup(group.id)}">
+                                            <button class="btn btn-primary btn-sm">Apostar</button>
+                                        </c:if>
+
+                                        <c:if test="${group.dono.id == user.id}">
+                                            <button class="btn btn-success btn-sm">Finalizar</button>
+                                        </c:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
                 </div>
             </div>
         </aside>

@@ -84,6 +84,10 @@ function abrirNovoIdolo() {
     $('#modal-newIdolo').removeClass("invisible");
 }
 
+function novoEvento(){
+    $('#newEvent').removeClass("invisible");
+}
+
 function buscarIdolosPorNome() {
     var nome = $('#inputIdolos').val();
     if (nome !== "") {

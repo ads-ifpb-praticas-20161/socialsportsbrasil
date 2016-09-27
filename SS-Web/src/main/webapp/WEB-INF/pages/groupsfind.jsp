@@ -23,7 +23,7 @@
                             </h4>
                             <p>Dono:
                                 <c:if test="${group.dono.id == user.id}"><a href="#">Você</a></c:if>
-                                <c:if test="${group.dono.id != user.id}"><a href="/user/otherUser/${group.dono.id}">${group.dono.nome}</a></c:if>
+                                <c:if test="${group.dono.id != user.id}"><a href="/user/otherUser/${group.dono.id}">${group.dono.nome} ${group.dono.sobrenome}</a></c:if>
                             </p>
                         </div>
                     </c:forEach>

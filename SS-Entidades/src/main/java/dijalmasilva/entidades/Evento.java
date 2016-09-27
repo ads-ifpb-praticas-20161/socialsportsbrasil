@@ -8,10 +8,14 @@ package dijalmasilva.entidades;
 import dijalmasilva.enums.TipoResultado;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -28,13 +32,16 @@ public class Evento implements Serializable {
     @GeneratedValue
     private Long id;
 
+    private String descricao;
+
     @OneToOne
     private Grupo grupo;
 
     private LocalDate dataDoEvento;
-    private LocalDateTime horaInicio;
-    private LocalDateTime horaFim;
-    @Enumerated
+    @ElementCollection(targetClass = TipoResultado.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "evento_tiporesultado")
+    @Column(name = "possiveisresultados", nullable = false)
     private List<TipoResultado> tiposDeResultados;
 
     public Long getId() {
@@ -53,28 +60,24 @@ public class Evento implements Serializable {
         this.grupo = grupo;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public LocalDate getDataDoEvento() {
         return dataDoEvento;
     }
 
+    public String getDataFormatado() {
+        return dataDoEvento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
     public void setDataDoEvento(LocalDate dataDoEvento) {
         this.dataDoEvento = dataDoEvento;
-    }
-
-    public LocalDateTime getHoraInicio() {
-        return horaInicio;
-    }
-
-    public void setHoraInicio(LocalDateTime horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public LocalDateTime getHoraFim() {
-        return horaFim;
-    }
-
-    public void setHoraFim(LocalDateTime horaFim) {
-        this.horaFim = horaFim;
     }
 
     public List<TipoResultado> getTiposDeResultados() {
@@ -111,13 +114,13 @@ public class Evento implements Serializable {
             return false;
         }
         final Evento other = (Evento) obj;
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         if (!Objects.equals(this.dataDoEvento, other.dataDoEvento)) {
-            return false;
-        }
-        if (!Objects.equals(this.horaInicio, other.horaInicio)) {
-            return false;
-        }
-        if (!Objects.equals(this.horaFim, other.horaFim)) {
             return false;
         }
         return true;
@@ -125,7 +128,7 @@ public class Evento implements Serializable {
 
     @Override
     public String toString() {
-        return "Evento{" + "id=" + id + ", grupo=" + grupo + ", dataDoEvento=" + dataDoEvento + ", horaInicio=" + horaInicio + ", horaFim=" + horaFim + ", tiposDeResultados=" + tiposDeResultados + '}';
+        return "Evento{" + "id=" + id + ", descricao=" + descricao + ", grupo=" + grupo + ", dataDoEvento=" + dataDoEvento + ", tiposDeResultados=" + tiposDeResultados + '}';
     }
 
 }

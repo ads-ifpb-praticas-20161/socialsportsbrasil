@@ -5,8 +5,10 @@
  */
 package dijalmasilva.controllers;
 
+import dijalmasilva.core.service.EventoService;
 import dijalmasilva.core.service.GrupoService;
 import dijalmasilva.core.service.IdoloService;
+import dijalmasilva.entidades.Evento;
 import dijalmasilva.entidades.Grupo;
 import dijalmasilva.entidades.Idolo;
 import dijalmasilva.entidades.Usuario;
@@ -30,6 +32,8 @@ public class ControladorGrupo {
     private GrupoService serviceGrupo;
     @Inject
     private IdoloService serviceIdolo;
+    @Inject
+    private EventoService serviceEvento;
 
     @RequestMapping("/my")
     public String followingGroups() {
@@ -39,6 +43,8 @@ public class ControladorGrupo {
     @RequestMapping("/{id}")
     public String getGroup(@PathVariable Long id, HttpServletRequest req) {
         Grupo grupo = serviceGrupo.buscar(id);
+        List<Evento> eventos = serviceEvento.findByIdOfGroup(id);
+        req.setAttribute("eventos", eventos);
         req.setAttribute("group", grupo);
         return "otherGroup";
     }

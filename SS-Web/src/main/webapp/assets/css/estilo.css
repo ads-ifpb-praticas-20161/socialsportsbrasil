@@ -24,6 +24,14 @@ body {
     margin: 0 auto;
 }
 
+.event-card {
+    background: #F3F3F3;
+    text-align: left;
+    text-indent: 20px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
 header {
     position: fixed;
     background: #fcfcfc;

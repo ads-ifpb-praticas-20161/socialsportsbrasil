@@ -20,7 +20,7 @@
                         <div class="col-lg-3 col-sm-4 col-xs-12 col-md-4 card">
                             <h4><a href="/groups/${grupo.id}">${grupo.nome}</a></h4>
                             <h5>Dono: <c:if test="${grupo.dono.id == user.id}"><a href="#">Você</a></c:if>
-                                <c:if test="${grupo.dono.id != user.id}"><a href="/user/otherUser/${grupo.dono.id}">${grupo.dono.nome}</a></c:if>
+                                <c:if test="${grupo.dono.id != user.id}"><a href="/user/otherUser/${grupo.dono.id}">${grupo.dono.nome} ${grupo.dono.sobrenome}</a></c:if>
                                 </h5>
                             </div>
                     </c:forEach>
