@@ -4,8 +4,8 @@ dijalmasilva/core/service/VisitaServiceImpl.class
 dijalmasilva/core/service/GrupoService.class
 dijalmasilva/core/repository/UsuarioRepository.class
 dijalmasilva/core/repository/EventoRepository.class
-dijalmasilva/core/service/EventoServiceImpl.class
 dijalmasilva/core/service/VisitaService.class
+dijalmasilva/core/service/EventoServiceImpl.class
 dijalmasilva/core/service/IdoloServiceImpl.class
 dijalmasilva/core/service/UsuarioService.class
 dijalmasilva/core/service/EventoService.class
